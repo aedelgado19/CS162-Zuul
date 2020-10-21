@@ -13,4 +13,4 @@ private:
   char* description;
   char* exits;
   char* items;
-}
+};
