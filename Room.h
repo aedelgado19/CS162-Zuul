@@ -1,5 +1,10 @@
 //header for room
-#include "Item.h"
+#include "Items.h"
+#include <vector>
+
+using namespace std;
+vector<Items> itemVtr;
+
 class Room {
 public:
   char* getDescription();

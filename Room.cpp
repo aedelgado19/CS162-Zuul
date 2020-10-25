@@ -30,8 +30,8 @@ char* Room::getItems(){
 }
 
 void Room::setItems(char* inputItems){
-
-
+  
+  
 }
 
 char* Room::getShortDescription(){
@@ -39,6 +39,7 @@ char* Room::getShortDescription(){
 }
 
 char* Room::getLongDescription(){
+  //this doesn't work
   char str[100] = "You are ";
   char desc[100] = description;
   char exit[100] = getExitString();
@@ -53,6 +54,6 @@ char* Room::getExitString(){
   char items[] = "\nItems in this room:\n";
   //for( put iterator here
   strcat(returnString, items);
-  strcat(returnString, getItems());
+  //strcat(returnString, getItems());
   return returnString;
 }
