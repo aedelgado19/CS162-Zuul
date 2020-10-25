@@ -1,5 +1,5 @@
 //header for room
-
+#include "Item.h"
 class Room {
 public:
   char* getDescription();
@@ -8,6 +8,9 @@ public:
   void setExits(char* inputExits);
   char* getItems();
   void setItems(char* inputItems);
+  char* getShortDescription();
+  char* getLongDescription();
+  char* getExitString();
   
 private:
   char* description;

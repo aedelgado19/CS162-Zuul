@@ -26,3 +26,7 @@ bool Command::hasSecondWord(){
 
 
 }
+Command::Command(char* word1, char* word2){
+  strcpy(commandWord, word1);
+  strcpy(secondWord, word2);
+}

@@ -3,10 +3,10 @@
 #include <iostream>
 #include <cstring>
 
+using namespace std;
+
 void setCommands(){
-  /*  char ValidCommands[] = {
-    "go", "quit", "help", "get", "drop", "inventory", "sandwich"
-    };*/
+ 
 }
 
 
@@ -16,6 +16,15 @@ void getCommands(){
 }
 
 bool isCommand(char* inputCommand){
+  for(int i = 0; i < sizeof(validCommands); i++){
+    if(strcmp(inputCommand, validCommands[i]) == 0){
+      return true;
+    }
+  }
+  return false;
+}
+
+CommandWords::CommandWords(){
 
 
 }

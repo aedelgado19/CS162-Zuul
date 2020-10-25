@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <map>
 #include "Room.h"
 #include "CommandWords.h"
 #include "Command.h"
@@ -27,7 +28,7 @@ void printWelcome(){
   cout << "Good luck!" << endl;
 }
 
-void createRooms(){
+void createRooms(vector<Room*> *RoomVtr){
   Room* Zuulway = new Room();
   Zuulway->setDescription((char*)("in the main room of the sub shop."));
   
@@ -46,7 +47,7 @@ void createRooms(){
   PuppyRoom->setDescription((char*)("in a room full of puppies! Don't question it."));
 
 
-
+ 
   Room* Bathroom = new Room();
   Bathroom->setDescription((char*)("in the... bathroom? Ew, get out!"));
 
@@ -109,10 +110,7 @@ int main(){
   vector<Room*> roomVtr;
   vector<Items*> itemVtr;
   printWelcome();
-  
-  
-
-
+ 
 
   return 0;
 }
