@@ -10,7 +10,7 @@ char* Room::getDescription(){
 
 }
 
-void Room::setDescription(char* inputDesscription){
+void Room::setDescription(char* inputDescription){
 
 
 }

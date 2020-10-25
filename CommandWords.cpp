@@ -4,9 +4,9 @@
 #include <cstring>
 
 void setCommands(){
-  char ValidCommands[] = {
+  /*  char ValidCommands[] = {
     "go", "quit", "help", "get", "drop", "inventory", "sandwich"
-  };
+    };*/
 }
 
 

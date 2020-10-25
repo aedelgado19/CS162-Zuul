@@ -1,14 +1,12 @@
 //header for Items.cpp
 #include <iostream>
-#include "Items.h"
 
-char* Items::getName(){
+class Items{
+public:
+  char* getName();
+  void setName(char* inputName);
 
+private:
+  char* name;
+};
 
-}
-
-void Items::setName(char* inputName){
-
-
-
-}
