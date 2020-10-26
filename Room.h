@@ -1,7 +1,8 @@
 //header for room
+#include <iostream>
 #include "Items.h"
 #include <vector>
-
+#include <unordered_map>
 using namespace std;
 
 
@@ -17,10 +18,12 @@ public:
   char* getLongDescription();
   char* getExitString();
   char* getRoom();
+  Room();
 private:
   char* description;
   char* exits;
   char* items;
   char* roomName;
+  unordered_map<char*, Room*> *roomExits;
   vector<Items*> *itemVtr;
 };

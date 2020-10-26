@@ -9,5 +9,5 @@ public:
   void getCommands();
   bool isCommand(char* inputCommand);
   CommandWords();
-
+  void showAll();
 };

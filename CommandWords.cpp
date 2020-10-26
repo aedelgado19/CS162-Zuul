@@ -23,3 +23,11 @@ CommandWords::CommandWords(){
 
 
 }
+
+void CommandWords::showAll(){
+  for(int i = 0; i < 7; i++) {
+    cout << validCommands[i] << "  " << endl;
+  }
+  cout << " " << endl;
+	
+}

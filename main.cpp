@@ -27,7 +27,6 @@ void printSandwichContents();
 void printInventory();
 
 
-
 void printWelcome(){
   cout << "Welcome to Zuulway!" << endl;
   cout << "Zuulway takes place in a haunted sub sandwich shop that has a maze to find the ingredients." << endl;
@@ -200,14 +199,13 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr){
   CheeseRoom->setItems(new Items("cheese"));
   MayonnaiseRoom->setItems(new Items("mayo"));
   VegetableRoom->setItems(new Items("tomatoes"));
-  LettuceRoom->setItems(new Items("lettuce"));
-  
+  LettuceRoom->setItems(new Items("lettuce"));  
 }
-/*
+
   bool processCommand(Command command){
   bool wantToQuit = false;
   
-  
+  /*  
   //illegal commands
   if(command.isUnknown()) {
     cout << "I don't know what you mean..." << endl;
@@ -240,9 +238,9 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr){
   else if (strcmp(commandWord, "sandwich") == 0){
     printSandwichContents();
   }
-  return wantToQuit;
+  return wantToQuit;*/
 }
-*/
+  
  //set up inventory and state what is in it
 void printInventory(vector<Items*> itemVtr) {
   Items* iPtr;
@@ -253,7 +251,7 @@ void printInventory(vector<Items*> itemVtr) {
   }
   cout << "You are carrying:  " << endl;
   cout << desc;
-    }
+}
 
 
 //do this after you get inventory working!!! it's basically the same.
@@ -305,11 +303,12 @@ int main(){
   vector<Room*> roomVtr;
   vector<Items*> itemVtr;
   vector<Items*> sandwichVtr;
+  vector<Items*> *inventory;
   CommandWords *cw = new CommandWords();
   Parser *p = new Parser();
   printWelcome();
   bool finished = false;
-  while (finished != false){
+  while (finished == false){
     Command command = p->getCommand();
   }
 

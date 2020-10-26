@@ -2,6 +2,7 @@
 #include "Room.h"
 #include <iostream>
 #include <cstring>
+#include <map>
 using namespace std;
 
 char* Room::getDescription(){
@@ -20,7 +21,7 @@ char* Room::getExits(){
 }
 
 void Room::setExits(char* direction, Room* inputExits){
-
+  roomExits->insert({direction, inputExits});
 
 }
 
@@ -58,4 +59,9 @@ char* Room::getExitString(){
 char* Room::getRoom(){
 
   return roomName;
+}
+
+Room::Room(){
+  roomExits = new unordered_map<char*, Room*>();
+
 }

@@ -8,7 +8,7 @@ Command Parser::getCommand(){
   char inputLine[50];
   char word1[20];
   char word2[20];
-  cout << "> " << endl;
+  cout << "> ";
   cin.get(inputLine, 50);
   cin.get();
 
