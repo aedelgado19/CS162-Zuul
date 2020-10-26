@@ -15,7 +15,7 @@ void Room::setDescription(char* inputDescription){
 }
 
 char* Room::getExits(){
-  
+ 
 
 }
 
@@ -29,8 +29,8 @@ char* Room::getItems(){
 
 }
 
-void Room::setItems(char* inputItems){
-  
+void Room::setItems(Items* inputItems){
+  itemVtr->push_back(inputItems);
   
 }
 

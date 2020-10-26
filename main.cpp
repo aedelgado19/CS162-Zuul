@@ -17,7 +17,7 @@
 using namespace std;
 
 void printWelcome();
-void createRooms();
+void createRooms(vector<Room*> *RoomVtr, vector<Item*> *itemVtr);
 void printHelp();
 void goRoom(Command command, Room currentRoom);
 void quit(Command command);
@@ -51,7 +51,7 @@ void printSandwichContents(){
 
 }
 
-void createRooms(vector<Room*> *RoomVtr){
+void createRooms(vector<Room*> *RoomVtr, vector<Item*> *itemVtr){
   Room* Zuulway = new Room();
   Room* DarkRoom = new Room();
   Room* EmployeeHangout = new Room();
@@ -193,15 +193,15 @@ void createRooms(vector<Room*> *RoomVtr){
   LettuceRoom->setDescription((char*)("in the lettuce room. Here you can satisfy all your lettuce needs! Watch out for the e-coli."));
   LettuceRoom->setExits("up", Hallway);
   RoomVtr->push_back(LettuceRoom);
-  /*
+  
   //items
-  JalapenoRoom->setItem(new Items("jalapenos"));
-  VegetableRoom->setItem(new Items("turkey"));
-  CheeseRoom->setItem(new Items("cheese"));
-  MayonnaiseRoom->setItem(new Items("mayo"));
-  VegetableRoom->setItem(new Items("tomatoes"));
-  LettuceRoom->setItem(new Items("lettuce"));
-  */
+  itemVtr->push_back(setItems(new Items("jalapenos")));
+  VegetableRoom->setItems(new Items("turkey"));
+  CheeseRoom->setItems(new Items("cheese"));
+  MayonnaiseRoom->setItems(new Items("mayo"));
+  VegetableRoom->setItems(new Items("tomatoes"));
+  LettuceRoom->setItems(new Items("lettuce"));
+  
 }
 /*
   bool processCommand(Command command){

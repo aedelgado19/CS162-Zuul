@@ -17,6 +17,7 @@ void Items::setName(char* inputName){
 
 }
 
-Items::Items(){
-
+Items::Items(char* inputName){
+  
+  
 }

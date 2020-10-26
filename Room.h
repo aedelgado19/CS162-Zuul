@@ -3,7 +3,7 @@
 #include <vector>
 
 using namespace std;
-vector<Items*> itemVtr;
+vector<Items*> *itemVtr;
 
 class Room {
 public:
@@ -12,7 +12,7 @@ public:
   char* getExits();
   void setExits(char* direction, Room* inputExits);
   char* getItems();
-  void setItems(char* inputItems);
+  void setItems(Items* inputItems);
   char* getShortDescription();
   char* getLongDescription();
   char* getExitString();
