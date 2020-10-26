@@ -76,7 +76,7 @@ void createRooms(vector<Room*> *RoomVtr){
   Zuulway->setDescription((char*)("in the main room of the sub shop."));
   Zuulway->setExits("east", PuppyRoom);
   Zuulway->setExits("south", BossOffice);
-  Zuulway->setExits("west", BossOffice);
+  Zuulway->setExits("west", WeirdRoom);
   Zuulway->setExits("north", DarkRoom);
   RoomVtr->push_back(Zuulway);
   
