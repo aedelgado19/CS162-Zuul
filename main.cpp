@@ -17,7 +17,7 @@
 using namespace std;
 
 void printWelcome();
-void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr);
+void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&currentRoom);
 void printHelp();
 void goRoom(Command command, Room currentRoom);
 void quit(Command command);
@@ -50,7 +50,7 @@ void printSandwichContents(){
 
 }
 
-void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr){
+void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&currentRoom){
   Room* Zuulway = new Room();
   Room* DarkRoom = new Room();
   Room* EmployeeHangout = new Room();
@@ -69,16 +69,17 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr){
   Room* Hallway = new Room();
   Room* BackRoom = new Room();
   Room* LettuceRoom = new Room();
-  
-  
+
+
   //Zuulway
   Zuulway->setDescription((char*)("in the main room of the sub shop."));
+  currentRoom = Zuulway;
   Zuulway->setExits("east", PuppyRoom);
   Zuulway->setExits("south", BossOffice);
   Zuulway->setExits("west", WeirdRoom);
   Zuulway->setExits("north", DarkRoom);
   RoomVtr->push_back(Zuulway);
-  
+
   //DarkRoom
   DarkRoom->setDescription((char*)("in a dark eerie room. Doesn't smell the greatest in here."));
   DarkRoom->setExits("south", Zuulway);
@@ -300,6 +301,7 @@ void goRoom(Command command, Room currentRoom) {
   }*/
 
 int main(){
+  Room* currentRoom;
   vector<Room*> roomVtr;
   vector<Items*> itemVtr;
   vector<Items*> sandwichVtr;
