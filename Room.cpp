@@ -47,12 +47,22 @@ char* Room::getLongDescription(){
   return output;
 }
 
+//got from cplusplus.com
 char* Room::getExitString(){
-  char returnString[100] = "Exits:";
-  char items[] = "\nItems in this room:\n";
-  //for( put iterator here
-  strcat(returnString, items);
-  //strcat(returnString, getItems());
+  char returnString[100];
+  strcpy(returnString, "Exits in this room: ");
+  for(unordered_map<char*, Room*>::iterator index = this->roomExits->begin(); index != roomExits->end(); ++index){
+    strcat(returnString, " ");
+    strcat(returnString, index->first);
+  }
+  strcat(returnString, "Items in this room: ");
+  
+  if(strcmp(getItems(), "") == 0){
+    strcat(returnString, "no items.");
+  } else {
+    strcat(returnString, " ");
+    strcat(returnString, getItems());
+  }
   return returnString;
 }
 

@@ -21,7 +21,6 @@ public:
   Room();
 private:
   char* description;
-  char* exits;
   char* items;
   char* roomName;
   unordered_map<char*, Room*> *roomExits;
