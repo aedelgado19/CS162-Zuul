@@ -3,7 +3,7 @@
 #include <vector>
 
 using namespace std;
-vector<Items*> *itemVtr;
+
 
 class Room {
 public:
@@ -22,4 +22,5 @@ private:
   char* exits;
   char* items;
   char* roomName;
+  vector<Items*> *itemVtr;
 };

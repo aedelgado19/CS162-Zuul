@@ -17,7 +17,7 @@
 using namespace std;
 
 void printWelcome();
-void createRooms(vector<Room*> *RoomVtr, vector<Item*> *itemVtr);
+void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr);
 void printHelp();
 void goRoom(Command command, Room currentRoom);
 void quit(Command command);
@@ -51,7 +51,7 @@ void printSandwichContents(){
 
 }
 
-void createRooms(vector<Room*> *RoomVtr, vector<Item*> *itemVtr){
+void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr){
   Room* Zuulway = new Room();
   Room* DarkRoom = new Room();
   Room* EmployeeHangout = new Room();
@@ -195,7 +195,7 @@ void createRooms(vector<Room*> *RoomVtr, vector<Item*> *itemVtr){
   RoomVtr->push_back(LettuceRoom);
   
   //items
-  itemVtr->push_back(setItems(new Items("jalapenos")));
+  JalapenoRoom->setItems(new Items("jalapenos"));
   VegetableRoom->setItems(new Items("turkey"));
   CheeseRoom->setItems(new Items("cheese"));
   MayonnaiseRoom->setItems(new Items("mayo"));
