@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cstring>
 
+#pragma once
+
 char* Command::getCommandWord(){
   return commandWord;
 }
@@ -19,14 +21,15 @@ void Command::setSecondWord(char* inputSecondWord){
 }
 
 bool Command::isUnknown(){
-
+  return false;
 }
 
 bool Command::hasSecondWord(){
-
+  return false;
 
 }
 Command::Command(char* word1, char* word2){
   strcpy(commandWord, word1);
   strcpy(secondWord, word2);
 }
+

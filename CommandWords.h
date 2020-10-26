@@ -6,10 +6,8 @@ private:
     "go", "quit", "help", "get", "drop", "inventory", "sandwich"};
 
 public:
-  void setCommands();
   void getCommands();
   bool isCommand(char* inputCommand);
-
   CommandWords();
 
 };

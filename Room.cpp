@@ -19,7 +19,7 @@ char* Room::getExits(){
 
 }
 
-void Room::setExits(char* inputExits){
+void Room::setExits(char* direction, Room* inputExits){
 
 
 }
@@ -39,14 +39,11 @@ char* Room::getShortDescription(){
 }
 
 char* Room::getLongDescription(){
-  //this doesn't work
-  char str[100] = "You are ";
-  char desc[100] = description;
-  char exit[100] = getExitString();
-
-  strcat(str, desc);
-  strcat(str, exit);
-  return str;
+  char* output = new char[100];
+  strcpy(output, getRoom());
+  strcat(output, description);
+  strcat(output, getExitString());
+  return output;
 }
 
 char* Room::getExitString(){
@@ -56,4 +53,9 @@ char* Room::getExitString(){
   strcat(returnString, items);
   //strcat(returnString, getItems());
   return returnString;
+}
+
+char* Room::getRoom(){
+
+  return roomName;
 }
