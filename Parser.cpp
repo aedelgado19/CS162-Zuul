@@ -16,8 +16,9 @@ Command Parser::getCommand(){
     cin.get(inputLine, 50);
     cin.get();
     mytoken = parseCommand(inputLine);
-    checkValid(mytoken);
+    isValid = checkValid(mytoken);
   }
+  
 }
 
 bool Parser::checkValid(tokens* mytoken){
