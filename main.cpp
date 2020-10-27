@@ -9,23 +9,26 @@
 #include <vector>
 #include <map>
 #include "Room.h"
-//#include "CommandWords.h"
-//#include "Command.h"
-//#include "Items.h"
 #include "Parser.h"
 
 using namespace std;
 
+//function prototypes
 void printWelcome();
 void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&currentRoom);
 void printHelp();
-void goRoom(Command command, Room currentRoom);
-void quit(Command command);
-void dropItem(Command command);
-void getItem(Command command);
+void goRoom(tokens* command, Room currentRoom);
+void quit();
+void dropItem(tokens* command);
+void getItem(tokens* command);
 void printSandwichContents();
 void printInventory();
+bool processCommand(tokens* command);
 
+void quit(){
+  cout << "Thank you for playing Zuulway. Quitting program now." << endl;
+  
+}
 
 void printWelcome(){
   cout << "Welcome to Zuulway!" << endl;
@@ -35,7 +38,7 @@ void printWelcome(){
   cout << "A sad empty sandwich lays on the counter. To escape, you must add: tomatoes, mayo, jalapenos, turkey, cheese, and lettuce." << endl;
   cout << "Good luck!" << endl;
 }
-void getItem(Command command){
+void getItem(tokens* command){
 
 
 }
@@ -199,45 +202,32 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   LettuceRoom->setItems(new Items("lettuce"));  
 }
 
-  bool processCommand(Command command){
+bool processCommand(tokens* command){
   bool wantToQuit = false;
-  
-  /*  
-  //illegal commands
-  if(command.isUnknown()) {
-    cout << "I don't know what you mean..." << endl;
-    return false;
+  if(strcmp(command->word1, "help") == 0){
+    printHelp();   
   }
-
-  Command *cwPtr = new Command();
-  //legal commands
-  char commandWord[] = cwPtr->getCommandWord();
-  if (strcmp(commandWord, "help") == 0) {
-    printHelp();
+  else if(strcmp(command->word1, "go") == 0){
+    goRoom(command);
   }
-  else if(strcmp(commandWord, "go") == 0) {
-    //goRoom(command, currentRoom);
+  else if(strcmp(command->word1, "quit") == 0){
+    wantToQuit = true;
   }
-  else if (strcmp(commandWord, "quit") == 0){
-    if(wantToQuit == true){
-      quit(command);
-    }
-  }
-  else if (strcmp(commandWord, "get") == 0){
+  else if(strcmp(command->word1, "get") == 0){
     getItem(command);
   }
-  else if (strcmp(commandWord, "drop") == 0){
+  else if(strcmp(command->word1, "drop") == 0){
     dropItem(command);
   }
-  else if (strcmp(commandWord, "inventory") == 0){
+  else if(strcmp(command->word1, "inventory") == 0){
     printInventory();
   }
-  else if (strcmp(commandWord, "sandwich") == 0){
+  else if(strcmp(command->word1, "sandwich") == 0){
     printSandwichContents();
   }
-  return wantToQuit;*/
+  return wantToQuit;
 }
-  
+
  //set up inventory and state what is in it
 void printInventory(vector<Items*> itemVtr) {
   Items* iPtr;
@@ -294,7 +284,7 @@ void goRoom(Command command, Room currentRoom) {
     //currentRoom = nextRoom;
     //    cout << cPtr->getLongDescription();
   }
-  }*/
+}*/
 
 int main(){
   Room* currentRoom;
@@ -307,8 +297,9 @@ int main(){
   printWelcome();
   bool finished = false;
   while (finished == false){
-    Command command = p->getCommand();
+    tokens* command = p->getCommand();
+    finished = processCommand(command);
   }
-
+  quit();
   return 0;
 }

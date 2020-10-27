@@ -4,7 +4,7 @@
 using namespace std;
 
 //taken from cplusplus.com
-Command Parser::getCommand(){
+tokens* Parser::getCommand(){
   bool isValid = false;
   char inputLine[50];
   char word1[20];
@@ -17,8 +17,11 @@ Command Parser::getCommand(){
     cin.get();
     mytoken = parseCommand(inputLine);
     isValid = checkValid(mytoken);
+    cout << isValid << endl;
   }
+  //command is valid
   
+  return mytoken;
 }
 
 bool Parser::checkValid(tokens* mytoken){
@@ -144,8 +147,8 @@ tokens* Parser::parseCommand(char* inputLine){
 }
 
 
-Command Parser::showCommand(){
-  //commands->showAll();
+tokens* Parser::showCommand(){
+  //literally what does this do
 
 
 }

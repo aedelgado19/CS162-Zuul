@@ -1,5 +1,5 @@
 //header for Parser.cpp
-#include "Command.h"
+
 #include "CommandWords.h"
 
 struct tokens{
@@ -9,8 +9,8 @@ struct tokens{
 
 class Parser{
 public:	
-  Command getCommand();
-  Command showCommand();
+  tokens* getCommand();
+  tokens* showCommand();
   bool checkValid(tokens* mytoken);
   tokens* parseCommand(char* input);
   Parser();
