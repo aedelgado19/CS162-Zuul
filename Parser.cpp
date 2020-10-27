@@ -5,26 +5,36 @@ using namespace std;
 
 //taken from cplusplus.com
 Command Parser::getCommand(){
+  bool isValid = false;
   char inputLine[50];
   char word1[20];
   char word2[20];
-  cout << "> ";
-  cin.get(inputLine, 50);
-  cin.get();
 
+  while(isValid = false){
+    cout << "> ";
+    cin.get(inputLine, 50);
+    cin.get();
+    parseCommand(inputLine);
+    checkValid();//error: pass in each word
+  }
+}
+
+bool Parser::checkValid(Command word1, Command word2){
+
+
+}
+
+tokens* Parser::parseCommand(char* input){
   char *charPtr;
   charPtr = strtok(inputLine, " ");
   strcpy(word1, charPtr);
   charPtr = strtok(NULL, " ");
-  strcpy(word2, charPtr);
+  if(charPtr != NULL){
+    strcpy(word2, charPtr);
+  }
 
-  if(commands.isCommand(word1)){
-    return Command(word1, word2);
-  }
-  else {
-    return Command(NULL, word2);
-  }
 }
+
 
 Command Parser::showCommand(){
   //commands->showAll();

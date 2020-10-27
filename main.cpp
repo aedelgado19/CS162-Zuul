@@ -40,10 +40,6 @@ void getItem(Command command){
 
 }
 
-void printInventory(){
-
-
-}
 
 void printSandwichContents(){
 
