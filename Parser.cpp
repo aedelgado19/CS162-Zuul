@@ -9,30 +9,34 @@ Command Parser::getCommand(){
   char inputLine[50];
   char word1[20];
   char word2[20];
+  tokens *mytoken = NULL;
 
-  while(isValid = false){
+  while(isValid == false){
     cout << "> ";
     cin.get(inputLine, 50);
     cin.get();
     parseCommand(inputLine);
-    checkValid();//error: pass in each word
+    checkValid(mytoken);
   }
 }
 
-bool Parser::checkValid(Command word1, Command word2){
+bool Parser::checkValid(tokens* mytoken){
 
 
 }
 
-tokens* Parser::parseCommand(char* input){
+tokens* Parser::parseCommand(char* inputLine){
   char *charPtr;
+  tokens *mytoken = new tokens;
   charPtr = strtok(inputLine, " ");
-  strcpy(word1, charPtr);
+  strcpy(mytoken->word1, charPtr);
   charPtr = strtok(NULL, " ");
   if(charPtr != NULL){
-    strcpy(word2, charPtr);
+    strcpy(mytoken->word2, charPtr);
+  } else {
+    strcpy(mytoken->word2, "invalid");
   }
-
+  return mytoken;
 }
 
 

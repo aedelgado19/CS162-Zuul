@@ -11,7 +11,7 @@ class Parser{
 public:	
   Command getCommand();
   Command showCommand();
-  bool checkValid(Command word1, Command word2);
+  bool checkValid(tokens* mytoken);
   tokens* parseCommand(char* input);
   Parser();
 private:
