@@ -291,8 +291,10 @@ int main(){
   vector<Items*> *itemVtr = new vector<Items*>();
   vector<Items*> *sandwichVtr = new vector<Items*>();
   vector<Items*> *inventory = new vector<Items*>();
-  Room* currentRoom = roomVtr->front();
-  createRooms(roomVtr, itemVtr, NULL);
+
+  Room* currentRoom = NULL; 
+  createRooms(roomVtr, itemVtr, currentRoom);
+  currentRoom = roomVtr->front();
   currentRoom->getLongDescription();
   CommandWords *cw = new CommandWords();
   Parser *p = new Parser();
