@@ -124,7 +124,7 @@ bool Parser::checkValid(tokens* mytoken){
   }
   
   if(strcmp(mytoken->word1, "eat") == 0){
-    cout << "no, you cannot anything, it's not lunch time!" << endl;
+    cout << "no, you cannot eat anything, it's not lunch time!" << endl;
     return false;
   }
   cout << "unknown command." << endl;
@@ -149,7 +149,7 @@ tokens* Parser::parseCommand(char* inputLine){
 
 tokens* Parser::showCommand(){
   //literally what does this do
-
+  commands.showAll();
 
 }
 Parser::Parser(){

@@ -22,8 +22,8 @@ void quit();
 void dropItem(tokens* command);
 void getItem(tokens* command, Room* currentRoom);
 void printSandwichContents();
-void printInventory();
-bool processCommand(tokens* command, Room* currentRoom);
+void printInventory(vector<Items*> *itemVtr);
+bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *itemVtr);
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
@@ -202,7 +202,7 @@ void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentR
   LettuceRoom->setItems(new Items("lettuce"));  
 }
 
-bool processCommand(tokens* command, Room* currentRoom){
+bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *itemVtr){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
     printHelp();   
@@ -220,7 +220,7 @@ bool processCommand(tokens* command, Room* currentRoom){
     dropItem(command);
   }
   else if(strcmp(command->word1, "inventory") == 0){
-    printInventory();
+    printInventory(itemVtr);
   }
   else if(strcmp(command->word1, "sandwich") == 0){
     printSandwichContents();
@@ -297,7 +297,7 @@ int main(){
   bool finished = false;
   while (finished == false){
     tokens* command = p->getCommand();
-    finished = processCommand(command, currentRoom);
+    finished = processCommand(command, currentRoom, itemVtr);
   }
   quit();
   return 0;
