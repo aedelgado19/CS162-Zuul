@@ -264,7 +264,7 @@ void printHelp(){
 }
 
 
-void goRoom(tokens* command, Room currentRoom) {
+void goRoom(tokens* command, Room* currentRoom) {
   
   char* direction = command->word2;
       
