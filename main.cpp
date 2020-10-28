@@ -15,15 +15,15 @@ using namespace std;
 
 //function prototypes
 void printWelcome();
-void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&currentRoom);
+void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentRoom);
 void printHelp();
-void goRoom(tokens* command, Room currentRoom);
+void goRoom(tokens* command, Room* currentRoom);
 void quit();
 void dropItem(tokens* command);
-void getItem(tokens* command);
+void getItem(tokens* command, Room* currentRoom);
 void printSandwichContents();
 void printInventory();
-bool processCommand(tokens* command);
+bool processCommand(tokens* command, Room* currentRoom);
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
@@ -38,7 +38,7 @@ void printWelcome(){
   cout << "A sad empty sandwich lays on the counter. To escape, you must add: tomatoes, mayo, jalapenos, turkey, cheese, and lettuce." << endl;
   cout << "Good luck!" << endl;
 }
-void getItem(tokens* command){
+void getItem(tokens* command, Room* currentRoom){
 
 
 }
@@ -49,7 +49,7 @@ void printSandwichContents(){
 
 }
 
-void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&currentRoom){
+void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentRoom){
   Room* Zuulway = new Room();
   Room* DarkRoom = new Room();
   Room* EmployeeHangout = new Room();
@@ -77,7 +77,7 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   Zuulway->setExits("south", BossOffice);
   Zuulway->setExits("west", WeirdRoom);
   Zuulway->setExits("north", DarkRoom);
-  RoomVtr->push_back(Zuulway);
+  roomVtr->push_back(Zuulway);
 
   //DarkRoom
   DarkRoom->setDescription((char*)("in a dark eerie room. Doesn't smell the greatest in here."));
@@ -85,7 +85,7 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   DarkRoom->setExits("up", VegetableRoom);
   DarkRoom->setExits("east", EmployeeHangout);
   DarkRoom->setExits("west", Outside);
-  RoomVtr->push_back(DarkRoom);
+  roomVtr->push_back(DarkRoom);
   
   //employee hangout
   EmployeeHangout->setDescription((char*)("in the employee break room. Say hi to everyone!"));
@@ -93,7 +93,7 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   EmployeeHangout->setExits("southeast", Hallway);
   EmployeeHangout->setExits("south", PuppyRoom);
   EmployeeHangout->setExits("west", DarkRoom);
-  RoomVtr->push_back(EmployeeHangout);
+  roomVtr->push_back(EmployeeHangout);
   
   //puppy room
   PuppyRoom->setDescription((char*)("in a room full of puppies! Don't question it."));
@@ -101,14 +101,14 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   PuppyRoom->setExits("east", Hallway);
   PuppyRoom->setExits("south", Bathroom);
   PuppyRoom->setExits("west", Zuulway);
-  RoomVtr->push_back(PuppyRoom);
+  roomVtr->push_back(PuppyRoom);
   
   //bathroom
   Bathroom->setDescription((char*)("in the... bathroom? Ew, get out!"));
   Bathroom->setExits("north", PuppyRoom);
   Bathroom->setExits("southwest", CheeseRoom);
   Bathroom->setExits("west", BossOffice);
-  RoomVtr->push_back(Bathroom);
+  roomVtr->push_back(Bathroom);
 
   //boss office
   BossOffice->setDescription((char*)("in your boss's office. He doesn't look happy. You should probably leave."));
@@ -116,26 +116,26 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   BossOffice->setExits("east", Bathroom);
   BossOffice->setExits("southeast", CheeseRoom);
   BossOffice->setExits("west", Storage);
-  RoomVtr->push_back(BossOffice);
+  roomVtr->push_back(BossOffice);
   
   //cheese room
   CheeseRoom->setDescription((char*)("in the cheese room! Here you can get cheese for your sandwich."));
   CheeseRoom->setExits("northwest", BossOffice);
   CheeseRoom->setExits("northeast", Bathroom);
-  RoomVtr->push_back(CheeseRoom);
+  roomVtr->push_back(CheeseRoom);
 
   //storage
   Storage->setDescription((char*)("in the storage room. Nothing cool here."));
   Storage->setExits("north", Outside);
   Storage->setExits("west", VegetableRoom);
   Storage->setExits("east", BossOffice);
-  RoomVtr->push_back(Storage);
+  roomVtr->push_back(Storage);
 
   //meat
   MeatRoom->setDescription((char*)("in the meat room. Here you can get meat for your sandwich."));
   MeatRoom->setExits("east", Storage);
   MeatRoom->setExits("northeast", WeirdRoom);
-  RoomVtr->push_back(MeatRoom);
+  roomVtr->push_back(MeatRoom);
 
   //weird room
   WeirdRoom->setDescription((char*)("in a weird room. It seems like nobody has been here in a while."));
@@ -143,36 +143,36 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   WeirdRoom->setExits("east", Zuulway);
   WeirdRoom->setExits("southwest", VegetableRoom);
   WeirdRoom->setExits("south", Storage);
-  RoomVtr->push_back(WeirdRoom);
+  roomVtr->push_back(WeirdRoom);
 
   //outside
   Outside->setDescription((char*)("outside. What? Get back inside, you have a job to do!"));
   Outside->setExits("northwest", Spa);
   Outside->setExits("east", DarkRoom);
   Outside->setExits("south", WeirdRoom);
-  RoomVtr->push_back(Outside);
+  roomVtr->push_back(Outside);
 
   //spa
   Spa->setDescription((char*)("in an indoor luxury spa. You're not sure why there's a spa in a Zuulway, but whatever!"));
   Spa->setExits("east", JalapenoRoom);
   Spa->setExits("southeast", Outside);
-  RoomVtr->push_back(Spa);
+  roomVtr->push_back(Spa);
 
   //jalapeno
   JalapenoRoom->setDescription((char*)("in the jalapeno room. Here you can get all your spicy peppers for your sandwich."));
   JalapenoRoom->setExits("west", Spa);
-  RoomVtr->push_back(JalapenoRoom);
+  roomVtr->push_back(JalapenoRoom);
   
   //vegetable
   VegetableRoom->setDescription((char*)("in the vegetable room. Here you can get all your veggies!"));
   VegetableRoom->setExits("down", DarkRoom);
   VegetableRoom->setExits("east", MayonnaiseRoom);
-  RoomVtr->push_back(VegetableRoom);
+  roomVtr->push_back(VegetableRoom);
   
   //mayo
   MayonnaiseRoom->setDescription((char*)("in the mayo room. You swim neck deep in mayo, which is kind of nasty, but the sandwich does require mayo, so you have to deal with it."));
   MayonnaiseRoom->setExits("west", VegetableRoom);
-  RoomVtr->push_back(MayonnaiseRoom);
+  roomVtr->push_back(MayonnaiseRoom);
   
   //hall
   Hallway->setDescription((char*)("in the hallway. Nothing cool here."));
@@ -180,18 +180,18 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   Hallway->setExits("north", BackRoom);
   Hallway->setExits("west", PuppyRoom);
   Hallway->setExits("down", LettuceRoom);
-  RoomVtr->push_back(Hallway);
+  roomVtr->push_back(Hallway);
 
   //backroom
   BackRoom->setDescription((char*)("in the back room. There are a lot of boxes, but nothing of value."));
   BackRoom->setExits("west", EmployeeHangout);
   BackRoom->setExits("south", Hallway);
-  RoomVtr->push_back(BackRoom);
+  roomVtr->push_back(BackRoom);
   
   //lettuce
   LettuceRoom->setDescription((char*)("in the lettuce room. Here you can satisfy all your lettuce needs! Watch out for the e-coli."));
   LettuceRoom->setExits("up", Hallway);
-  RoomVtr->push_back(LettuceRoom);
+  roomVtr->push_back(LettuceRoom);
   
   //items
   JalapenoRoom->setItems(new Items("jalapenos"));
@@ -202,19 +202,19 @@ void createRooms(vector<Room*> *RoomVtr, vector<Items*> *itemVtr, Room *&current
   LettuceRoom->setItems(new Items("lettuce"));  
 }
 
-bool processCommand(tokens* command){
+bool processCommand(tokens* command, Room* currentRoom){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
     printHelp();   
   }
   else if(strcmp(command->word1, "go") == 0){
-    goRoom(command);
+    goRoom(command, currentRoom);
   }
   else if(strcmp(command->word1, "quit") == 0){
     wantToQuit = true;
   }
   else if(strcmp(command->word1, "get") == 0){
-    getItem(command);
+    getItem(command, currentRoom);
   }
   else if(strcmp(command->word1, "drop") == 0){
     dropItem(command);
@@ -263,42 +263,41 @@ void printHelp(){
   ptr->showCommand();
 }
 
-/*
-void goRoom(Command command, Room currentRoom) {
-  //Command *cPtr = new Command();
-  //if(cPtr->hasSecondWord() == false) {
-    // if there is no second word, we don't know where to go...
-    cout << "Go where?" << endl;
-    return;
-  }
+
+void goRoom(tokens* command, Room currentRoom) {
   
-  char direction[] = cPtr->getSecondWord();
+  char* direction = command->word2;
       
   // Try to leave current room.
+  /*
   Room nextRoom = currentRoom.getExits(direction);
   
-  if (&nextRoom == NULL){
+ if (&nextRoom == NULL){
     cout << "There is no door!" << endl;
   }
   else {
-    //currentRoom = nextRoom;
-    //    cout << cPtr->getLongDescription();
+    currentRoom = nextRoom;
+    cout << cPtr->getLongDescription();
   }
-}*/
+  */
+}
 
 int main(){
-  Room* currentRoom;
-  vector<Room*> roomVtr;
-  vector<Items*> itemVtr;
+
+  vector<Room*> *roomVtr;
+  vector<Items*> *itemVtr;
   vector<Items*> sandwichVtr;
   vector<Items*> *inventory;
+  Room* currentRoom = roomVtr->front();
+  createRooms(roomVtr, itemVtr, currentRoom);
+  currentRoom->getLongDescription();
   CommandWords *cw = new CommandWords();
   Parser *p = new Parser();
   printWelcome();
   bool finished = false;
   while (finished == false){
     tokens* command = p->getCommand();
-    finished = processCommand(command);
+    finished = processCommand(command, currentRoom);
   }
   quit();
   return 0;

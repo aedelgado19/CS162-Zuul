@@ -55,14 +55,14 @@ char* Room::getExitString(){
     strcat(returnString, " ");
     strcat(returnString, index->first);
   }
-  strcat(returnString, "Items in this room: ");
+  /*strcat(returnString, "Items in this room: ");
   
   if(strcmp(getItems(), "") == 0){
     strcat(returnString, "no items.");
   } else {
     strcat(returnString, " ");
     strcat(returnString, getItems());
-  }
+    }*/
   return returnString;
 }
 
