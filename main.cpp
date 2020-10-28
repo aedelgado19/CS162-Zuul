@@ -287,12 +287,12 @@ void goRoom(tokens* command, Room* currentRoom) {
 
 int main(){
 
-  vector<Room*> *roomVtr;
-  vector<Items*> *itemVtr;
-  vector<Items*> sandwichVtr;
-  vector<Items*> *inventory;
+  vector<Room*> *roomVtr = new vector<Room*>();
+  vector<Items*> *itemVtr = new vector<Items*>();
+  vector<Items*> *sandwichVtr = new vector<Items*>();
+  vector<Items*> *inventory = new vector<Items*>();
   Room* currentRoom = roomVtr->front();
-  createRooms(roomVtr, itemVtr, currentRoom);
+  createRooms(roomVtr, itemVtr, NULL);
   currentRoom->getLongDescription();
   CommandWords *cw = new CommandWords();
   Parser *p = new Parser();
