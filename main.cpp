@@ -15,7 +15,7 @@ using namespace std;
 
 //function prototypes
 void printWelcome();
-void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentRoom);
+void createRooms(vector<Room*> *roomVtr, Room *currentRoom);
 void printHelp();
 void goRoom(tokens* command, Room* currentRoom);
 void quit();
@@ -52,7 +52,7 @@ void printSandwichContents(){
 
 }
 
-void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentRoom){
+void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
   Room* Zuulway = new Room();
   Room* DarkRoom = new Room();
   Room* EmployeeHangout = new Room();
@@ -203,6 +203,8 @@ void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentR
   MayonnaiseRoom->setItems(new Items("mayo"));
   VegetableRoom->setItems(new Items("tomatoes"));
   LettuceRoom->setItems(new Items("lettuce"));  
+
+  
 }
 
 bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory){
@@ -288,12 +290,11 @@ void goRoom(tokens* command, Room* currentRoom) {
 int main(){
 
   vector<Room*> *roomVtr = new vector<Room*>();
-  vector<Items*> *itemVtr = new vector<Items*>();
   vector<Items*> *sandwichVtr = new vector<Items*>();
   vector<Items*> *inventory = new vector<Items*>();
 
   Room* currentRoom = NULL; 
-  createRooms(roomVtr, itemVtr, currentRoom);
+  createRooms(roomVtr, currentRoom);
   currentRoom = roomVtr->front();
   currentRoom->getLongDescription();
   CommandWords *cw = new CommandWords();

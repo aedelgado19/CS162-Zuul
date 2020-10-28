@@ -16,7 +16,7 @@ void Room::setDescription(char* inputDescription){
 }
 
 char* Room::getExits(){
- 
+  
 
 }
 
@@ -73,5 +73,6 @@ char* Room::getRoom(){
 
 Room::Room(){
   roomExits = new unordered_map<char*, Room*>();
-
+  vector<Items*> *itemVtr = new vector<Items*>();
+  cout << "in room constructor" << endl;
 }
