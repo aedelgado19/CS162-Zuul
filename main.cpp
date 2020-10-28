@@ -22,8 +22,8 @@ void quit();
 void dropItem(tokens* command);
 void getItem(tokens* command, Room* currentRoom);
 void printSandwichContents();
-void printInventory(vector<Items*> *itemVtr);
-bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *itemVtr);
+void printInventory(vector<Items*> *inventory);
+bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory);
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
@@ -202,7 +202,7 @@ void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentR
   LettuceRoom->setItems(new Items("lettuce"));  
 }
 
-bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *itemVtr){
+bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
     printHelp();   
@@ -220,7 +220,7 @@ bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *itemVtr)
     dropItem(command);
   }
   else if(strcmp(command->word1, "inventory") == 0){
-    printInventory(itemVtr);
+    printInventory(inventory);
   }
   else if(strcmp(command->word1, "sandwich") == 0){
     printSandwichContents();
@@ -229,11 +229,11 @@ bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *itemVtr)
 }
 
  //set up inventory and state what is in it
-void printInventory(vector<Items*> itemVtr) {
+void printInventory(vector<Items*> *inventory) {
   Items* iPtr;
   char output[80];
   char desc[80];
-  for(vector<Items*>::iterator index = itemVtr.begin(); index!=itemVtr.end(); ++index){
+  for(vector<Items*>::iterator index = inventory->begin(); index!=inventory->end(); ++index){
     // desc = iPtr->getDescription(); 
   }
   cout << "You are carrying:  " << endl;
@@ -297,7 +297,7 @@ int main(){
   bool finished = false;
   while (finished == false){
     tokens* command = p->getCommand();
-    finished = processCommand(command, currentRoom, itemVtr);
+    finished = processCommand(command, currentRoom, inventory);
   }
   quit();
   return 0;
