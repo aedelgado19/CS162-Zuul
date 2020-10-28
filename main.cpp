@@ -19,7 +19,7 @@ void createRooms(vector<Room*> *roomVtr, vector<Items*> *itemVtr, Room *currentR
 void printHelp();
 void goRoom(tokens* command, Room* currentRoom);
 void quit();
-void dropItem(tokens* command);
+void dropItem(tokens* command, Room* currentRoom, vector<Items*> *inventory);
 void getItem(tokens* command, Room* currentRoom);
 void printSandwichContents();
 void printInventory(vector<Items*> *inventory);
@@ -43,6 +43,9 @@ void getItem(tokens* command, Room* currentRoom){
 
 }
 
+void dropItem(tokens* command, Room* currentRoom, vector<Items*> *inventory){
+
+}
 
 void printSandwichContents(){
 
@@ -217,7 +220,7 @@ bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventor
     getItem(command, currentRoom);
   }
   else if(strcmp(command->word1, "drop") == 0){
-    dropItem(command);
+    dropItem(command, currentRoom, inventory);
   }
   else if(strcmp(command->word1, "inventory") == 0){
     printInventory(inventory);
