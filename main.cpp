@@ -14,7 +14,6 @@
 using namespace std;
 
 //function prototypes
-void printWelcome();
 void createRooms(vector<Room*> *roomVtr, Room *currentRoom);
 void printHelp(Parser *p);
 void goRoom(tokens* command, Room* currentRoom);
@@ -29,14 +28,6 @@ void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
 }
 
-void printWelcome(){
-  cout << "Welcome to Zuulway!" << endl;
-  cout << "Zuulway takes place in a haunted sub sandwich shop that has a maze to find the ingredients." << endl;
-  cout << "Type 'help' if you need help." << endl; //ALLY ADD HELP
-  cout << " " << endl;
-  cout << "A sad empty sandwich lays on the counter. To escape, you must add: tomatoes, mayo, jalapenos, turkey, cheese, and lettuce." << endl;
-  cout << "Good luck!" << endl;
-}
 void getItem(tokens* command, Room* currentRoom){
 
 
@@ -71,7 +62,16 @@ void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
   Room* BackRoom = new Room("BackRoom");
   Room* LettuceRoom = new Room("LettuceRoom");
 
-
+  //print welcome
+  cout << "Welcome to Zuulway!" << endl;
+  cout << "Zuulway takes place in a haunted sub sandwich shop that has a maze to find the ingredients." << endl;
+  cout << "Type 'help' if you need help." << endl; 
+  cout << " " << endl;
+  cout << "A sad empty sandwich lays on the counter. To escape, you must add: tomatoes, mayo, jalapenos, turkey, cheese, and lettuce." << endl;
+  cout << "Good luck!" << endl;
+  cout << " " << endl;
+  cout << Zuulway->getLongDescription() << endl;
+  
   //Zuulway
   Zuulway->setDescription((char*)("in the main room of the sub shop."));
   currentRoom = Zuulway;
@@ -269,18 +269,17 @@ void printHelp(Parser *p){
 
 
 void goRoom(tokens* command, Room* currentRoom) {
-  
+
   char* direction = command->word2;
-      
   // Try to leave current room.
+  Room* tempRoom= currentRoom->checkExits(direction);
+  //  Room *nextRoom = currentRoom->getExits();
   
-  Room nextRoom = currentRoom->getExits();
-  
- if (&nextRoom == NULL){
+  if (tempRoom == NULL){
     cout << "There is no door!" << endl;
   }
   else {
-    currentRoom = &nextRoom;
+    currentRoom = tempRoom;
     cout << currentRoom->getLongDescription();
   }
   
@@ -298,7 +297,6 @@ int main(){
   currentRoom->getLongDescription();
   CommandWords *cw = new CommandWords();
   Parser *p = new Parser();
-  printWelcome();
   bool finished = false;
   while (finished == false){
     tokens* command = p->getCommand();

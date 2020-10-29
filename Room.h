@@ -16,6 +16,7 @@ public:
   char* getLongDescription();
   char* getExitString();
   char* getRoom();
+  Room* checkExits(char* inputDirection);
   Room(char* inputRoomName);
 private:
   char description[200];

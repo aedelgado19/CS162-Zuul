@@ -1,8 +1,8 @@
-//roomsOA
+//rooms
 #include "Room.h"
 #include <iostream>
 #include <cstring>
-#include <map>
+#include <unordered_map>
 using namespace std;
 
 void Room::setDescription(char* inputDescription){
@@ -10,14 +10,15 @@ void Room::setDescription(char* inputDescription){
 
 }
 
-char* Room::getExits(){
-  
+Room* Room::checkExits(char* inputDirection){
+  unordered_map<char*, Room*> *mymap = roomExits;
+  auto junk = roomExits["north"];
 
+  
 }
 
 void Room::setExits(char* direction, Room* inputExits){
   roomExits->insert({direction, inputExits});
-
 }
 
 char* Room::getItems(){
