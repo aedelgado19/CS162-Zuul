@@ -6,7 +6,7 @@
 using namespace std;
 
 void Room::setDescription(char* inputDescription){
-  strcat(description, inputDescription);
+  strcpy(description, inputDescription);
 
 }
 
