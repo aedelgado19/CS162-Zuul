@@ -273,17 +273,17 @@ void goRoom(tokens* command, Room* currentRoom) {
   char* direction = command->word2;
       
   // Try to leave current room.
-  /*
-  Room nextRoom = currentRoom.getExits(direction);
+  
+  Room nextRoom = currentRoom->getExits();
   
  if (&nextRoom == NULL){
     cout << "There is no door!" << endl;
   }
   else {
-    currentRoom = nextRoom;
-    cout << cPtr->getLongDescription();
+    currentRoom = &nextRoom;
+    cout << currentRoom->getLongDescription();
   }
-  */
+  
 }
 
 int main(){

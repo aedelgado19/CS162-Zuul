@@ -52,6 +52,7 @@ bool Parser::checkValid(tokens* mytoken){
       return false;
     }
   }
+
   //quit
   if(strcmp(mytoken->word1, "quit") == 0){
     return true;
@@ -142,7 +143,7 @@ tokens* Parser::parseCommand(char* inputLine){
   } else {
     strcpy(mytoken->word1, "invalid");
   }
-  strcpy(mytoken->word1, charPtr);
+
   charPtr = strtok(NULL, " ");
   if(charPtr != NULL){
     strcpy(mytoken->word2, charPtr);
