@@ -40,11 +40,11 @@ char* Room::getLongDescription(){
 
 //got from cplusplus.com
 char* Room::getExitString(){
-  char returnString[100];
-  strcpy(returnString, "Exits in this room: ");
+  
+  strcpy(exitString, "Exits in this room: ");
   for(unordered_map<char*, Room*>::iterator index = this->roomExits->begin(); index != roomExits->end(); ++index){
-    strcat(returnString, " ");
-    strcat(returnString, index->first);
+    strcat(exitString, " ");
+    strcat(exitString, index->first);
   }
   /*strcat(returnString, "Items in this room: ");
   
@@ -54,7 +54,7 @@ char* Room::getExitString(){
     strcat(returnString, " ");
     strcat(returnString, getItems());
     }*/
-  return returnString;
+  return exitString;
 }
 
 char* Room::getRoom(){

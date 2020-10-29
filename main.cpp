@@ -16,14 +16,14 @@ using namespace std;
 //function prototypes
 void printWelcome();
 void createRooms(vector<Room*> *roomVtr, Room *currentRoom);
-void printHelp();
+void printHelp(Parser *p);
 void goRoom(tokens* command, Room* currentRoom);
 void quit();
 void dropItem(tokens* command, Room* currentRoom, vector<Items*> *inventory);
 void getItem(tokens* command, Room* currentRoom);
 void printSandwichContents();
 void printInventory(vector<Items*> *inventory);
-bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory);
+bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory, Parser *p);
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
@@ -206,10 +206,10 @@ void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
   
 }
 
-bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory){
+bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory, Parser *p){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
-    printHelp();   
+    printHelp(p);   
   }
   else if(strcmp(command->word1, "go") == 0){
     goRoom(command, currentRoom);
@@ -259,12 +259,12 @@ void printSandwichContents(Vector<Items*> sandwichVtr) {
   }*/
     
 //if user types help, print out these messages
-void printHelp(){
-  Parser *ptr;
+void printHelp(Parser *p){
   cout << "You are lost in a haunted sub shop." << endl;
   cout << "You need to make a nice sandwich with: jalapenos, tomatoes, mayo, turkey, lettuce, and cheese. " << endl;
   cout << "Your command words are: " << endl;
-  ptr->showCommand();
+  p->showCommand();
+  cout << "by the way, 'sandwich' returns contents of sandwich." << endl;
 }
 
 
@@ -302,7 +302,7 @@ int main(){
   bool finished = false;
   while (finished == false){
     tokens* command = p->getCommand();
-    finished = processCommand(command, currentRoom, inventory);
+    finished = processCommand(command, currentRoom, inventory, p);
   }
   quit();
   return 0;

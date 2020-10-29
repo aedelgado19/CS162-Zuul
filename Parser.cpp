@@ -149,7 +149,6 @@ tokens* Parser::parseCommand(char* inputLine){
 
 
 tokens* Parser::showCommand(){
-  //literally what does this do
   commands.showAll();
 
 }
