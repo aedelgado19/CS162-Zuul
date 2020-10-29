@@ -1,23 +1,11 @@
 //header for items
 #include "Items.h"
-
+#include <cstring>
 char* Items::getName(){
-  char ret[3];
-  return ret;
-}
-
-char* Items::getDescription(){
-
-  return desc;
-}
-
-void Items::setName(char* inputName){
-
-
-
+  return name;
 }
 
 Items::Items(char* inputName){
-  
+  strcpy(name, inputName);
   
 }

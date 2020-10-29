@@ -43,24 +43,24 @@ void printSandwichContents(){
 }
 
 void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
-  Room* Zuulway = new Room("Zuulway");
-  Room* DarkRoom = new Room("DarkRoom");
-  Room* EmployeeHangout = new Room("EmployeeHangout");
-  Room* PuppyRoom = new Room("PuppyRoom");
-  Room* Bathroom = new Room("Bathroom");
-  Room* BossOffice = new Room("BossOffice");
-  Room* CheeseRoom = new Room("CheeseRoom");
-  Room* Storage = new Room("Storage");
-  Room* MeatRoom = new Room("MeatRoom");
-  Room* WeirdRoom = new Room("WeirdRoom");
-  Room* Outside = new Room("Outside");
-  Room* Spa = new Room("Spa");
-  Room* JalapenoRoom = new Room("JalapenoRoom");
-  Room* VegetableRoom = new Room("VegetableRoom");
-  Room* MayonnaiseRoom = new Room("MayonnaiseRoom");
-  Room* Hallway = new Room("Hallway");
-  Room* BackRoom = new Room("BackRoom");
-  Room* LettuceRoom = new Room("LettuceRoom");
+  Room* Zuulway = new Room((char*)("Zuulway"));
+  Room* DarkRoom = new Room((char*)("DarkRoom"));
+  Room* EmployeeHangout = new Room((char*)("EmployeeHangout"));
+  Room* PuppyRoom = new Room((char*)("PuppyRoom"));
+  Room* Bathroom = new Room((char*)("Bathroom"));
+  Room* BossOffice = new Room((char*)("BossOffice"));
+  Room* CheeseRoom = new Room((char*)("CheeseRoom"));
+  Room* Storage = new Room((char*)("Storage"));
+  Room* MeatRoom = new Room((char*)("MeatRoom"));
+  Room* WeirdRoom = new Room((char*)("WeirdRoom"));
+  Room* Outside = new Room((char*)("Outside"));
+  Room* Spa = new Room((char*)("Spa"));
+  Room* JalapenoRoom = new Room((char*)("JalapenoRoom"));
+  Room* VegetableRoom = new Room((char*)("VegetableRoom"));
+  Room* MayonnaiseRoom = new Room((char*)("MayonnaiseRoom"));
+  Room* Hallway = new Room((char*)("Hallway"));
+  Room* BackRoom = new Room((char*)("BackRoom"));
+  Room* LettuceRoom = new Room((char*)("LettuceRoom"));
 
   //print welcome
   cout << "Welcome to Zuulway!" << endl;
@@ -71,139 +71,137 @@ void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
   cout << "Good luck!" << endl;
   cout << " " << endl;
   cout << Zuulway->getLongDescription() << endl;
-  
+
   //Zuulway
   Zuulway->setDescription((char*)("in the main room of the sub shop."));
   currentRoom = Zuulway;
-  Zuulway->setExits("east", PuppyRoom);
-  Zuulway->setExits("south", BossOffice);
-  Zuulway->setExits("west", WeirdRoom);
-  Zuulway->setExits("north", DarkRoom);
+  Zuulway->setExits((char*)("east"), PuppyRoom);
+  Zuulway->setExits((char*)("south"), BossOffice);
+  Zuulway->setExits((char*)("west"), WeirdRoom);
+  Zuulway->setExits((char*)("north"), DarkRoom);
   roomVtr->push_back(Zuulway);
 
   //DarkRoom
   DarkRoom->setDescription((char*)("in a dark eerie room. Doesn't smell the greatest in here."));
-  DarkRoom->setExits("south", Zuulway);
-  DarkRoom->setExits("up", VegetableRoom);
-  DarkRoom->setExits("east", EmployeeHangout);
-  DarkRoom->setExits("west", Outside);
+  DarkRoom->setExits((char*)("south"), Zuulway);
+  DarkRoom->setExits((char*)("up"), VegetableRoom);
+  DarkRoom->setExits((char*)("east"), EmployeeHangout);
+  DarkRoom->setExits((char*)("west"), Outside);
   roomVtr->push_back(DarkRoom);
   
   //employee hangout
   EmployeeHangout->setDescription((char*)("in the employee break room. Say hi to everyone!"));
-  EmployeeHangout->setExits("east", BackRoom);
-  EmployeeHangout->setExits("southeast", Hallway);
-  EmployeeHangout->setExits("south", PuppyRoom);
-  EmployeeHangout->setExits("west", DarkRoom);
+  EmployeeHangout->setExits((char*)("east"), BackRoom);
+  EmployeeHangout->setExits((char*)("southeast"), Hallway);
+  EmployeeHangout->setExits((char*)("south"), PuppyRoom);
+  EmployeeHangout->setExits((char*)("west"), DarkRoom);
   roomVtr->push_back(EmployeeHangout);
   
   //puppy room
   PuppyRoom->setDescription((char*)("in a room full of puppies! Don't question it."));
-  PuppyRoom->setExits("north", EmployeeHangout);
-  PuppyRoom->setExits("east", Hallway);
-  PuppyRoom->setExits("south", Bathroom);
-  PuppyRoom->setExits("west", Zuulway);
+  PuppyRoom->setExits((char*)("north"), EmployeeHangout);
+  PuppyRoom->setExits((char*)("east"), Hallway);
+  PuppyRoom->setExits((char*)("south"), Bathroom);
+  PuppyRoom->setExits((char*)("west"), Zuulway);
   roomVtr->push_back(PuppyRoom);
   
   //bathroom
   Bathroom->setDescription((char*)("in the... bathroom? Ew, get out!"));
-  Bathroom->setExits("north", PuppyRoom);
-  Bathroom->setExits("southwest", CheeseRoom);
-  Bathroom->setExits("west", BossOffice);
+  Bathroom->setExits((char*)("north"), PuppyRoom);
+  Bathroom->setExits((char*)("southwest"), CheeseRoom);
+  Bathroom->setExits((char*)("west"), BossOffice);
   roomVtr->push_back(Bathroom);
 
   //boss office
   BossOffice->setDescription((char*)("in your boss's office. He doesn't look happy. You should probably leave."));
-  BossOffice->setExits("north", Zuulway);
-  BossOffice->setExits("east", Bathroom);
-  BossOffice->setExits("southeast", CheeseRoom);
-  BossOffice->setExits("west", Storage);
+  BossOffice->setExits((char*)("north"), Zuulway);
+  BossOffice->setExits((char*)("east"), Bathroom);
+  BossOffice->setExits((char*)("southeast"), CheeseRoom);
+  BossOffice->setExits((char*)("west"), Storage);
   roomVtr->push_back(BossOffice);
   
   //cheese room
   CheeseRoom->setDescription((char*)("in the cheese room! Here you can get cheese for your sandwich."));
-  CheeseRoom->setExits("northwest", BossOffice);
-  CheeseRoom->setExits("northeast", Bathroom);
+  CheeseRoom->setExits((char*)("northwest"), BossOffice);
+  CheeseRoom->setExits((char*)("northeast"), Bathroom);
   roomVtr->push_back(CheeseRoom);
 
   //storage
   Storage->setDescription((char*)("in the storage room. Nothing cool here."));
-  Storage->setExits("north", Outside);
-  Storage->setExits("west", VegetableRoom);
-  Storage->setExits("east", BossOffice);
+  Storage->setExits((char*)("north"), Outside);
+  Storage->setExits((char*)("west"), VegetableRoom);
+  Storage->setExits((char*)("east"), BossOffice);
   roomVtr->push_back(Storage);
 
   //meat
   MeatRoom->setDescription((char*)("in the meat room. Here you can get meat for your sandwich."));
-  MeatRoom->setExits("east", Storage);
-  MeatRoom->setExits("northeast", WeirdRoom);
+  MeatRoom->setExits((char*)("east"), Storage);
+  MeatRoom->setExits((char*)("northeast"), WeirdRoom);
   roomVtr->push_back(MeatRoom);
 
   //weird room
   WeirdRoom->setDescription((char*)("in a weird room. It seems like nobody has been here in a while."));
-  WeirdRoom->setExits("north", Outside);
-  WeirdRoom->setExits("east", Zuulway);
-  WeirdRoom->setExits("southwest", VegetableRoom);
-  WeirdRoom->setExits("south", Storage);
+  WeirdRoom->setExits((char*)("north"), Outside);
+  WeirdRoom->setExits((char*)("east"), Zuulway);
+  WeirdRoom->setExits((char*)("southwest"), VegetableRoom);
+  WeirdRoom->setExits((char*)("south"), Storage);
   roomVtr->push_back(WeirdRoom);
 
   //outside
   Outside->setDescription((char*)("outside. What? Get back inside, you have a job to do!"));
-  Outside->setExits("northwest", Spa);
-  Outside->setExits("east", DarkRoom);
-  Outside->setExits("south", WeirdRoom);
+  Outside->setExits((char*)("northwest"), Spa);
+  Outside->setExits((char*)("east"), DarkRoom);
+  Outside->setExits((char*) ("south"), WeirdRoom);
   roomVtr->push_back(Outside);
 
   //spa
   Spa->setDescription((char*)("in an indoor luxury spa. You're not sure why there's a spa in a Zuulway, but whatever!"));
-  Spa->setExits("east", JalapenoRoom);
-  Spa->setExits("southeast", Outside);
+  Spa->setExits((char*)("east"), JalapenoRoom);
+  Spa->setExits((char*)("southeast"), Outside);
   roomVtr->push_back(Spa);
 
   //jalapeno
   JalapenoRoom->setDescription((char*)("in the jalapeno room. Here you can get all your spicy peppers for your sandwich."));
-  JalapenoRoom->setExits("west", Spa);
+  JalapenoRoom->setExits((char*)("west"), Spa);
   roomVtr->push_back(JalapenoRoom);
   
   //vegetable
   VegetableRoom->setDescription((char*)("in the vegetable room. Here you can get all your veggies!"));
-  VegetableRoom->setExits("down", DarkRoom);
-  VegetableRoom->setExits("east", MayonnaiseRoom);
+  VegetableRoom->setExits((char*)("down"), DarkRoom);
+  VegetableRoom->setExits((char*)("east"), MayonnaiseRoom);
   roomVtr->push_back(VegetableRoom);
   
   //mayo
   MayonnaiseRoom->setDescription((char*)("in the mayo room. You swim neck deep in mayo, which is kind of nasty, but the sandwich does require mayo, so you have to deal with it."));
-  MayonnaiseRoom->setExits("west", VegetableRoom);
+			  MayonnaiseRoom->setExits((char*)("west"), VegetableRoom);
   roomVtr->push_back(MayonnaiseRoom);
   
   //hall
   Hallway->setDescription((char*)("in the hallway. Nothing cool here."));
-  Hallway->setExits("northwest", EmployeeHangout);
-  Hallway->setExits("north", BackRoom);
-  Hallway->setExits("west", PuppyRoom);
-  Hallway->setExits("down", LettuceRoom);
+  Hallway->setExits((char*)("northwest"), EmployeeHangout);
+  Hallway->setExits((char*)("north"), BackRoom);
+  Hallway->setExits((char*)("west"), PuppyRoom);
+  Hallway->setExits((char*)("down"), LettuceRoom);
   roomVtr->push_back(Hallway);
 
   //backroom
   BackRoom->setDescription((char*)("in the back room. There are a lot of boxes, but nothing of value."));
-  BackRoom->setExits("west", EmployeeHangout);
-  BackRoom->setExits("south", Hallway);
+  BackRoom->setExits((char*)("west"), EmployeeHangout);
+  BackRoom->setExits((char*)("south"), Hallway);
   roomVtr->push_back(BackRoom);
   
   //lettuce
   LettuceRoom->setDescription((char*)("in the lettuce room. Here you can satisfy all your lettuce needs! Watch out for the e-coli."));
-  LettuceRoom->setExits("up", Hallway);
+  LettuceRoom->setExits((char*)("up"), Hallway);
   roomVtr->push_back(LettuceRoom);
   
   //items
-  JalapenoRoom->setItems(new Items("jalapenos"));
-  VegetableRoom->setItems(new Items("turkey"));
-  CheeseRoom->setItems(new Items("cheese"));
-  MayonnaiseRoom->setItems(new Items("mayo"));
-  VegetableRoom->setItems(new Items("tomatoes"));
-  LettuceRoom->setItems(new Items("lettuce"));  
-
-  
+  JalapenoRoom->setItems(new Items((char*)("jalapenos")));
+  VegetableRoom->setItems(new Items((char*)("turkey")));
+  CheeseRoom->setItems(new Items((char*)("cheese")));
+  MayonnaiseRoom->setItems(new Items((char*)("mayo")));
+  VegetableRoom->setItems(new Items((char*)("tomatoes")));
+  LettuceRoom->setItems(new Items((char*)("lettuce")));  
 }
 
 bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory, Parser *p){
@@ -234,14 +232,12 @@ bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventor
 
  //set up inventory and state what is in it
 void printInventory(vector<Items*> *inventory) {
-  Items* iPtr;
   char output[80];
-  char desc[80];
-  for(vector<Items*>::iterator index = inventory->begin(); index!=inventory->end(); ++index){
-    // desc = iPtr->getDescription(); 
-  }
+
   cout << "You are carrying:  " << endl;
-  cout << desc;
+  for(vector<Items*>::iterator index = inventory->begin(); index!=inventory->end(); ++index){
+    cout << index->getName() << " " << endl;
+  }
 }
 
 
@@ -299,6 +295,7 @@ int main(){
   Parser *p = new Parser();
   bool finished = false;
   while (finished == false){
+    cout << "lol fix pass by ref ex: currentroom" << endl;
     tokens* command = p->getCommand();
     finished = processCommand(command, currentRoom, inventory, p);
   }

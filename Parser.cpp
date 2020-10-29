@@ -18,7 +18,7 @@ tokens* Parser::getCommand(){
     cin.get();
     mytoken = parseCommand(inputLine);
     isValid = checkValid(mytoken);
-    cout << isValid << endl;
+     cout << isValid << endl;
   }
   //command is valid
   
@@ -47,6 +47,22 @@ bool Parser::checkValid(tokens* mytoken){
     else if(strcmp(mytoken->word2, "down") == 0){
       return true;
     }
+    else if(strcmp(mytoken->word2, "northeast") == 0){
+      return true;
+    }
+    
+    else if(strcmp(mytoken->word2, "southeast") == 0){
+      return true;
+    }
+    
+    else if(strcmp(mytoken->word2, "southwest") == 0){
+      return true;
+    }
+    
+    else if(strcmp(mytoken->word2, "northwest") == 0){
+      return true;
+    }
+ 
     else{
       cout << "Second word not valid" << endl;
       return false;

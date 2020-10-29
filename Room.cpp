@@ -3,6 +3,8 @@
 #include <iostream>
 #include <cstring>
 #include <unordered_map>
+#include <map>
+#include <cstddef>
 using namespace std;
 
 void Room::setDescription(char* inputDescription){
@@ -11,10 +13,14 @@ void Room::setDescription(char* inputDescription){
 }
 
 Room* Room::checkExits(char* inputDirection){
-  unordered_map<char*, Room*> *mymap = roomExits;
-  auto junk = roomExits["north"];
-
   
+  unordered_map<char*, Room*>::const_iterator mymap = roomExits->find(inputDirection);
+  if(mymap == roomExits->end()){
+    return NULL;
+  }
+  else {
+    return mymap->second(); 
+  }
 }
 
 void Room::setExits(char* direction, Room* inputExits){
