@@ -20,7 +20,7 @@ public:
   char* getRoom();
   Room(char* inputRoomName);
 private:
-  char* description;
+  char description[200];
   char* items;
   char* roomName;
   unordered_map<char*, Room*> *roomExits;

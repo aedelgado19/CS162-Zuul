@@ -11,7 +11,7 @@ char* Room::getDescription(){
 }
 
 void Room::setDescription(char* inputDescription){
-
+  strcat(description, inputDescription);
 
 }
 
