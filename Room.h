@@ -23,6 +23,6 @@ private:
   char* items;
   char exitString[512];
   char roomName[50];
-  unordered_map<char*, Room*> *roomExits;
+  unordered_map<char*, Room*> roomExits;
   vector<Items*> *itemVtr;
 };

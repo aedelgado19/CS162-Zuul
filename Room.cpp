@@ -13,18 +13,21 @@ void Room::setDescription(char* inputDescription){
 }
 
 Room* Room::checkExits(char* inputDirection){
-  
-  unordered_map<char*, Room*>::const_iterator mymap = roomExits->find(inputDirection);
-  if(mymap == roomExits->end()){
-    return NULL;
+  unordered_map<const char*, Room*>:: iterator index;
+  Room *nextRoom = NULL;
+  for (index = roomExits.begin(); index != roomExits.end(); index++) {
+    if (strcmp(index->first, inputDirection) ==0) {
+      cout << "\nYou head " << inputDirection << " to " << index->second->getRoom() << endl;
+      nextRoom = index->second;
+    }
   }
-  else {
-    return mymap->second(); 
-  }
+  return nextRoom;
 }
 
-void Room::setExits(char* direction, Room* inputExits){
-  roomExits->insert({direction, inputExits});
+void Room::setExits(const char* direction, Room* inputExits){
+  roomExits.insert(make_pair(direction, inputExits));
+  //roomExits[direction] = inputExits;
+
 }
 
 char* Room::getItems(){
@@ -47,11 +50,12 @@ char* Room::getLongDescription(){
 
 //got from cplusplus.com
 char* Room::getExitString(){
-  
+  unordered_map<const char*, Room*>:: iterator index;
   strcpy(exitString, "Exits in this room: ");
-  for(unordered_map<char*, Room*>::iterator index = this->roomExits->begin(); index != roomExits->end(); ++index){
-    strcat(exitString, " ");
-    strcat(exitString, index->first);
+   for (index = roomExits.begin(); index != roomExits.end(); index++) {
+     cout << index->first << " ";
+     strcat(exitString, index->first);
+     strcat(exitString, " ");
   }
   /*strcat(returnString, "Items in this room: ");
   
@@ -70,7 +74,6 @@ char* Room::getRoom(){
 }
 
 Room::Room(char* inputRoomName){
-  roomExits = new unordered_map<char*, Room*>();
   itemVtr = new vector<Items*>();
   cout << "in room constructor" << endl;
   strcpy(roomName, inputRoomName);
