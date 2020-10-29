@@ -27,7 +27,6 @@ bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventor
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
-  
 }
 
 void printWelcome(){
@@ -53,24 +52,24 @@ void printSandwichContents(){
 }
 
 void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
-  Room* Zuulway = new Room();
-  Room* DarkRoom = new Room();
-  Room* EmployeeHangout = new Room();
-  Room* PuppyRoom = new Room();
-  Room* Bathroom = new Room();
-  Room* BossOffice = new Room();
-  Room* CheeseRoom = new Room();
-  Room* Storage = new Room();
-  Room* MeatRoom = new Room();
-  Room* WeirdRoom = new Room();
-  Room* Outside = new Room();
-  Room* Spa = new Room();
-  Room* JalapenoRoom = new Room();
-  Room* VegetableRoom = new Room();
-  Room* MayonnaiseRoom = new Room();
-  Room* Hallway = new Room();
-  Room* BackRoom = new Room();
-  Room* LettuceRoom = new Room();
+  Room* Zuulway = new Room("Zuulway");
+  Room* DarkRoom = new Room("DarkRoom");
+  Room* EmployeeHangout = new Room("EmployeeHangout");
+  Room* PuppyRoom = new Room("PuppyRoom");
+  Room* Bathroom = new Room("Bathroom");
+  Room* BossOffice = new Room("BossOffice");
+  Room* CheeseRoom = new Room("CheeseRoom");
+  Room* Storage = new Room("Storage");
+  Room* MeatRoom = new Room("MeatRoom");
+  Room* WeirdRoom = new Room("WeirdRoom");
+  Room* Outside = new Room("Outside");
+  Room* Spa = new Room("Spa");
+  Room* JalapenoRoom = new Room("JalapenoRoom");
+  Room* VegetableRoom = new Room("VegetableRoom");
+  Room* MayonnaiseRoom = new Room("MayonnaiseRoom");
+  Room* Hallway = new Room("Hallway");
+  Room* BackRoom = new Room("BackRoom");
+  Room* LettuceRoom = new Room("LettuceRoom");
 
 
   //Zuulway

@@ -1,4 +1,4 @@
-//rooms
+//roomsOA
 #include "Room.h"
 #include <iostream>
 #include <cstring>
@@ -71,8 +71,10 @@ char* Room::getRoom(){
   return roomName;
 }
 
-Room::Room(){
+Room::Room(char* inputRoomName){
   roomExits = new unordered_map<char*, Room*>();
-  vector<Items*> *itemVtr = new vector<Items*>();
+  itemVtr = new vector<Items*>();
   cout << "in room constructor" << endl;
+  roomName = new char[50];
+  strcpy(roomName, inputRoomName);
 }

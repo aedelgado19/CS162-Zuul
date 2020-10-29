@@ -18,7 +18,7 @@ public:
   char* getLongDescription();
   char* getExitString();
   char* getRoom();
-  Room();
+  Room(char* inputRoomName);
 private:
   char* description;
   char* items;
