@@ -137,6 +137,11 @@ tokens* Parser::parseCommand(char* inputLine){
   char *charPtr;
   tokens *mytoken = new tokens;
   charPtr = strtok(inputLine, " ");
+  if(charPtr !=  NULL){
+    strcpy(mytoken->word1, charPtr);
+  } else {
+    strcpy(mytoken->word1, "invalid");
+  }
   strcpy(mytoken->word1, charPtr);
   charPtr = strtok(NULL, " ");
   if(charPtr != NULL){
