@@ -5,11 +5,6 @@
 #include <map>
 using namespace std;
 
-char* Room::getDescription(){
-
-
-}
-
 void Room::setDescription(char* inputDescription){
   strcat(description, inputDescription);
 
@@ -33,10 +28,6 @@ char* Room::getItems(){
 void Room::setItems(Items* inputItems){
   itemVtr->push_back(inputItems);
   
-}
-
-char* Room::getShortDescription(){
-  return description;
 }
 
 char* Room::getLongDescription(){
@@ -75,6 +66,5 @@ Room::Room(char* inputRoomName){
   roomExits = new unordered_map<char*, Room*>();
   itemVtr = new vector<Items*>();
   cout << "in room constructor" << endl;
-  roomName = new char[50];
   strcpy(roomName, inputRoomName);
 }

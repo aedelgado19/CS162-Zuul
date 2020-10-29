@@ -8,13 +8,11 @@ using namespace std;
 
 class Room {
 public:
-  char* getDescription();
   void setDescription(char* inputDescription);
   char* getExits();
   void setExits(char* direction, Room* inputExits);
   char* getItems();
   void setItems(Items* inputItems);
-  char* getShortDescription();
   char* getLongDescription();
   char* getExitString();
   char* getRoom();
@@ -22,7 +20,7 @@ public:
 private:
   char description[200];
   char* items;
-  char* roomName;
+  char roomName[50];
   unordered_map<char*, Room*> *roomExits;
   vector<Items*> *itemVtr;
 };
