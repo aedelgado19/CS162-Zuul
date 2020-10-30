@@ -101,6 +101,8 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   Room* LettuceRoom = new Room((char*)("LettuceRoom"));
 
   //print welcome
+  cout << "********************************" << endl;
+  cout << " " << endl;
   cout << "Welcome to Zuulway!" << endl;
   cout << "Zuulway takes place in a haunted sub sandwich shop that has a maze to find the ingredients." << endl;
   cout << "Type 'help' if you need help." << endl; 
@@ -110,6 +112,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   cout << "Once you think you have dropped all 6 ingredients, type 'sandwich' to win!" << endl;
   cout << "Good luck!" << endl;
   cout << " " << endl;
+  cout << "********************************" << endl;
   
   //Zuulway
   Zuulway->setDescription((char*)("You are in the main room of the sub shop."));
@@ -277,6 +280,7 @@ bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &invent
 
  //set up inventory and print what is in it
 void printInventory(vector<Items*> *inventory) {
+  cout << " " << endl;
   cout << "You are carrying:  " << endl;
   for(int i = 0; i < inventory->size(); i++){
     cout << inventory->at(i)->getName() << " " << endl;
@@ -285,7 +289,8 @@ void printInventory(vector<Items*> *inventory) {
 
 //set up sandwich content array and state what is in it
 bool printSandwichContents(vector<Items*> *sandwichVtr) {
-    int count = 0; //amount of things on sandwich
+  int count = 0; //amount of things on sandwich
+  cout << " " << endl;
   cout << "The sandwich contains:  " << endl;
   for(int i = 0; i < sandwichVtr->size(); i++){
     cout << sandwichVtr->at(i)->getName() << " " << endl;
@@ -302,6 +307,7 @@ bool printSandwichContents(vector<Items*> *sandwichVtr) {
     
 //if user types help, print out these messages
 void printHelp(Parser *p){
+  cout << "*************************************" << endl;
   cout << "You are lost in a haunted sub shop." << endl;
   cout << "You need to make a nice sandwich with: jalapenos, tomatoes, mayo, turkey, lettuce, and cheese. " << endl;
   cout << "Your command words are: " << endl;
