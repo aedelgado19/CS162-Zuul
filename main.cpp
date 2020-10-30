@@ -28,6 +28,8 @@ void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
 }
 
+
+//user picks up item from room, adds to inventory
 void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
   char* item;
   strcpy(item, command->word2);
@@ -43,33 +45,40 @@ void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
   }
 }
 
+//remove from inventory and put in room
 void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, vector<Items*> *&sandwichVtr){
   char* item;
   strcpy(item, command->word2);
   Items* newItem = NULL;
   int index;
+
+  //if name matches the name of an item in inventory...
   for(int i = 0; i < inventory->size(); i++){
     if(strcmp(inventory->at(i)->getName(), item) == 0){
       newItem = inventory->at(i);
       index = i;
     }
   }
-
+  //if there is no item to drop
   if(newItem == NULL){
     cout << "You don't have anything like that to drop." << endl;
   } else {
+
+    //if dropped in zuulway...
     if(strcmp(currentRoom->getRoom(), "Zuulway") == 0){
-      sandwichVtr->push_back(newItem);
+      sandwichVtr->push_back(newItem); //add to sandwich vector
       cout << "You placed " << newItem->getName() << " on the sandwich!" << endl;
     }
     else{
       currentRoom->addItem(newItem);
       cout << "You dropped: " << newItem->getName() << endl;
     }
+    //remove from inventory
     inventory->erase(inventory->begin()+index);
   }
 }
 
+//initialize all rooms and items
 void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   Room* Zuulway = new Room((char*)("Zuulway"));
   Room* DarkRoom = new Room((char*)("DarkRoom"));
@@ -234,6 +243,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   LettuceRoom->setItems(new Items((char*)("lettuce")));  
 }
 
+//takes in command, directs to other functions
 bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p, vector<Items*> *&sandwichVtr){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
