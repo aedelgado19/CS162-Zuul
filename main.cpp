@@ -31,10 +31,10 @@ void quit(){
 
 //user picks up item from room, adds to inventory
 void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
-  char* item;
+  char item[50];
   strcpy(item, command->word2);
 
-  Items* newItem;
+  Items* newItem = NULL;
   newItem = currentRoom->getItem(item);
   if(newItem == NULL){
     cout << "That item is not in this room!" << endl;
@@ -47,7 +47,7 @@ void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
 
 //remove from inventory and put in room
 void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, vector<Items*> *&sandwichVtr){
-  char* item;
+  char item[50];
   strcpy(item, command->word2);
   Items* newItem = NULL;
   int index;
@@ -68,6 +68,7 @@ void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, v
     if(strcmp(currentRoom->getRoom(), "Zuulway") == 0){
       sandwichVtr->push_back(newItem); //add to sandwich vector
       cout << "You placed " << newItem->getName() << " on the sandwich!" << endl;
+      cout << "To see contents of sandwich, type 'sandwich'" << endl;
     }
     else{
       currentRoom->addItem(newItem);
