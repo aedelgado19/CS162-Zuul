@@ -1,5 +1,5 @@
 /* Author: Allison Delgado
- * Last updated: Oct 20, 2020
+ * Last updated: Oct 29, 2020
  * Zuul is similar to Zork. The premise of this game is that
  * you are lost in a sub shop and must find all ingredients to escape
  */
@@ -249,31 +249,33 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
 //takes in command, directs to other functions
 bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p, vector<Items*> *&sandwichVtr){
   bool wantToQuit = false;
-  if(strcmp(command->word1, "help") == 0){
-    printHelp(p);   
+
+  //direct commands to other functions
+  if(strcmp(command->word1, "help") == 0){ //prints help message
+    printHelp(p);
   }
-  else if(strcmp(command->word1, "go") == 0){
+  else if(strcmp(command->word1, "go") == 0){ //goes to new room
     goRoom(command, currentRoom);
   }
   else if(strcmp(command->word1, "quit") == 0){
-    wantToQuit = true;
+    wantToQuit = true; //if user types quit, quit program
   }
   else if(strcmp(command->word1, "get") == 0){
-    getItem(command, currentRoom, inventory);
+    getItem(command, currentRoom, inventory); //this gets an item
   }
-  else if(strcmp(command->word1, "drop") == 0){
+  else if(strcmp(command->word1, "drop") == 0){ //drops an item
     dropItem(command, currentRoom, inventory, sandwichVtr);
   }
-  else if(strcmp(command->word1, "inventory") == 0){
+  else if(strcmp(command->word1, "inventory") == 0){ //shows contents of inventory
     printInventory(inventory);
   }
-  else if(strcmp(command->word1, "sandwich") == 0){
+  else if(strcmp(command->word1, "sandwich") == 0){ //shows contents of sandwich
     wantToQuit = printSandwichContents(sandwichVtr);
   }
   return wantToQuit;
 }
 
- //set up inventory and state what is in it
+ //set up inventory and print what is in it
 void printInventory(vector<Items*> *inventory) {
   cout << "You are carrying:  " << endl;
   for(int i = 0; i < inventory->size(); i++){
@@ -289,10 +291,12 @@ bool printSandwichContents(vector<Items*> *sandwichVtr) {
     cout << sandwichVtr->at(i)->getName() << " " << endl;
     count++;
   }
+  //if there are 6 items on the sandwich you win
   if(count == 6){
     cout << "You have won Zuulway and successfully made the sandwich!!" << endl;
     return true;
   }
+  //otherwise they have not won yet so return false
   return false;
 }
     
@@ -306,40 +310,48 @@ void printHelp(Parser *p){
   cout << "once you think you have dropped all 6 ingredients, type 'sandwich' to win!" << endl;
 }
 
-
+//traverse map by taking in direction and moving to room in that dir
 void goRoom(tokens* command, Room* &currentRoom) {
 
   char* direction = command->word2;
   // Try to leave current room.
   Room* tempRoom= currentRoom->checkExits(direction);
-  //  Room *nextRoom = currentRoom->getExits();
+
+  //if user tries to make up an exit..
   if (tempRoom == NULL){
     cout << "There is no door!" << endl;
   }
   else {
-    currentRoom = tempRoom;
+    currentRoom = tempRoom; //update current room
     cout << currentRoom->getLongDescription() << endl;
   }
   
 }
 
+//main class calls processCommand and creates vectors
 int main(){
+  //vectors
   vector<Room*> *roomVtr = new vector<Room*>();
   vector<Items*> *sandwichVtr = new vector<Items*>();
- vector<Items*> *inventory = new vector<Items*>();
+  vector<Items*> *inventory = new vector<Items*>();
 
+  //set current room initially
   Room* currentRoom = NULL; 
   createRooms(roomVtr, currentRoom);
-  //  currentRoom = roomVtr->front();
   currentRoom->getLongDescription();
+
+  //create pointers to be passed around
   CommandWords *cw = new CommandWords();
   Parser *p = new Parser();
   bool finished = false;
+
+  //while user has not won nor typed "quit"...
   while (finished == false){
     tokens* command = p->getCommand();
     finished = processCommand(command, currentRoom, inventory, p, sandwichVtr);
- 
   }
+  
+  //program over!
   quit();
   return 0;
 }

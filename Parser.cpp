@@ -1,32 +1,33 @@
+//Parser takes in user's commands, checks if valid, and returns valid commands
+
 #include "Parser.h"
 #include "string.h"
 #include <cstring>
 #include <iostream>
 using namespace std;
 
-//taken from cplusplus.com
+//take in command
 tokens* Parser::getCommand(){
   bool isValid = false;
   char inputLine[50];
-  char word1[20];
+  char word1[20]; //allocate memory for each word
   char word2[20];
   tokens *mytoken = NULL;
 
+  //keep looping until input is valid
   while(isValid == false){
-    cout << "> ";
+    cout << "> "; //prompt input
     cin.get(inputLine, 50);
     cin.get();
     mytoken = parseCommand(inputLine);
-    isValid = checkValid(mytoken);
-    //cout << isValid << endl;
+    isValid = checkValid(mytoken); //check if valid
   }
-  //command is valid
-  
+  //out of loop, command is valid
   return mytoken;
 }
 
+//basically a bunch of hardcoded checks to see if the user typed in a valid command
 bool Parser::checkValid(tokens* mytoken){
-
   //go commands
   if(strcmp(mytoken->word1, "go") == 0){
     if(strcmp(mytoken->word2, "north") == 0){
@@ -149,17 +150,18 @@ bool Parser::checkValid(tokens* mytoken){
   return false;
 }
 
+//separates command into word 1 and word 2 and places in struct "tokens"
 tokens* Parser::parseCommand(char* inputLine){
-
   char *charPtr;
   tokens *mytoken = new tokens;
-  charPtr = strtok(inputLine, " ");
-  if(charPtr !=  NULL){
+  charPtr = strtok(inputLine, " "); //separate with a space
+  if(charPtr !=  NULL){ //if not null, copy over
     strcpy(mytoken->word1, charPtr);
-  } else {
+  } else { //else store "invalid" as the first word since that will not pass checkValid() 
     strcpy(mytoken->word1, "invalid");
   }
-
+  
+  //same for second word
   charPtr = strtok(NULL, " ");
   if(charPtr != NULL){
     strcpy(mytoken->word2, charPtr);
@@ -169,11 +171,12 @@ tokens* Parser::parseCommand(char* inputLine){
   return mytoken;
 }
 
-
+//show all commands
 void  Parser::showCommand(){
   commands.showAll();
 }
+
+//constructor to create new commands
 Parser::Parser(){
   commands = CommandWords();
-
 }

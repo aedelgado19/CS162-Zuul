@@ -1,4 +1,4 @@
-//rooms
+//Room class contains all items in room, exits, descriptions
 #include "Room.h"
 #include <iostream>
 #include <cstring>
@@ -83,27 +83,31 @@ char* Room::getLongDescription(){
 char* Room::getExitString(){
   unordered_map< char*, Room*>:: iterator index;
   strcpy(exitString, "\nExits in this room: \n");
+
+  //iterate through room exits
   for (index = roomExits.begin(); index != roomExits.end(); index++) {
-    //cout << index->first << " " << endl;
     strcat(exitString, index->first);
     strcat(exitString, "\n");
   }
   strcat(exitString, "\n");
   strcat(exitString, "Items in this room: \n");
-  
-  if(strcmp(getItems(), "") == 0){
+
+  //get items from room
+  if(strcmp(getItems(), "") == 0){ //if no items...
     strcat(exitString, "no items.");
-  } else {
+  } else { //else get items
     strcat(exitString, " ");
     strcat(exitString, getItems());
   }
   return exitString;
 }
 
+//returns name of room
 char* Room::getRoom(){
   return roomName;
 }
 
+//constructor to add items into room and set room name
 Room::Room(char* inputRoomName){
   itemVtr = new vector<Items*>();
   strcpy(roomName, inputRoomName);
