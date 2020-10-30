@@ -18,11 +18,11 @@ void createRooms(vector<Room*>* &roomVtr, Room *&currentRoom);
 void printHelp(Parser *p);
 void goRoom(tokens* command, Room* &currentRoom);
 void quit();
-void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory);
+void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, vector<Items*> *&sandwichVtr);
 void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory);
-void printSandwichContents();
+void printSandwichContents(vector<Items*> *sandwichVtr);
 void printInventory(vector<Items*> *inventory);
-bool processCommand(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, Parser *&p);
+bool processCommand(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, Parser *&p, vector<Items*> *&sandwichVtr);
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
@@ -43,11 +43,9 @@ void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
   }
 }
 
-void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, ){
+void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, vector<Items*> *&sandwichVtr){
   char* item;
   strcpy(item, command->word2);
-  
-
   Items* newItem = NULL;
   int index;
   for(int i = 0; i < inventory->size(); i++){
@@ -60,12 +58,15 @@ void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, )
   if(newItem == NULL){
     cout << "You don't have anything like that to drop." << endl;
   } else {
-    if(strcmp(currentRoom->getName(), "Zuulway") == 0){
-      
+    if(strcmp(currentRoom->getRoom(), "Zuulway") == 0){
+      sandwichVtr->push_back(newItem);
+      cout << "You placed " << newItem->getName() << " on the sandwich!" << endl;
     }
-    currentRoom->addItem(newItem);
+    else{
+      currentRoom->addItem(newItem);
+      cout << "You dropped: " << newItem->getName() << endl;
+    }
     inventory->erase(inventory->begin()+index);
-    cout << "You dropped: " << newItem->getName() << endl;
   }
 }
 
@@ -220,7 +221,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   roomVtr->push_back(BackRoom);
   
   //lettuce
-  LettuceRoom->setDescription((char*)("You are in the lettuce room. Here you can satisfy all your lettuce needs! Watch out for the e-coli."));
+  LettuceRoom->setDescription((char*)("You are in the lettuce room. Here you can satisfy all your lettuce needs! Watch gout for the e-coli."));
   LettuceRoom->setExits((char*)("up"), Hallway);
   roomVtr->push_back(LettuceRoom);
   
@@ -233,7 +234,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   LettuceRoom->setItems(new Items((char*)("lettuce")));  
 }
 
-bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p,   vector<Items*> *sandwichVtr){
+bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p, vector<Items*> *&sandwichVtr){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
     printHelp(p);   
@@ -248,7 +249,7 @@ bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &invent
     getItem(command, currentRoom, inventory);
   }
   else if(strcmp(command->word1, "drop") == 0){
-    dropItem(command, currentRoom, inventory);
+    dropItem(command, currentRoom, inventory, sandwichVtr);
   }
   else if(strcmp(command->word1, "inventory") == 0){
     printInventory(inventory);
@@ -269,17 +270,13 @@ void printInventory(vector<Items*> *inventory) {
   }
 }
 
-//do this after you get inventory working!!! it's basically the same.
-
 //set up sandwich content array and state what is in it
-void printSandwichContents(Vector<Items*> sandwichVtr) {
-  char output[];
-  for(vector<Items*>::iterator index = itemVtr->begin(); index!=itemVtr->end(); ++index){
-    
-    output += sandwichcontents.get(i).getDescription() + ", ";
-  }
-  System.out.println("The sandwich has: ");
-  System.out.println(output);
+void printSandwichContents(vector<Items*> *sandwichVtr) {
+
+
+
+  
+
 }
     
 //if user types help, print out these messages
@@ -322,8 +319,9 @@ int main(){
   bool finished = false;
   while (finished == false){
     tokens* command = p->getCommand();
-    finished = processCommand(command, currentRoom, inventory, p);
+    finished = processCommand(command, currentRoom, inventory, p, sandwichVtr);
   }
   quit();
   return 0;
 }
+

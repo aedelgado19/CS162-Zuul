@@ -101,7 +101,6 @@ char* Room::getExitString(){
 }
 
 char* Room::getRoom(){
-
   return roomName;
 }
 
