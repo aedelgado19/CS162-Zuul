@@ -10,7 +10,7 @@ struct tokens{
 class Parser{
 public:	
   tokens* getCommand();
-  tokens* showCommand();
+  void showCommand();
   bool checkValid(tokens* mytoken);
   tokens* parseCommand(char* input);
   Parser();

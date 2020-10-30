@@ -14,26 +14,26 @@
 using namespace std;
 
 //function prototypes
-void createRooms(vector<Room*> *roomVtr, Room *currentRoom);
+void createRooms(vector<Room*>* &roomVtr, Room *&currentRoom);
 void printHelp(Parser *p);
-void goRoom(tokens* command, Room* currentRoom);
+void goRoom(tokens* command, Room* &currentRoom);
 void quit();
-void dropItem(tokens* command, Room* currentRoom, vector<Items*> *inventory);
-void getItem(tokens* command, Room* currentRoom);
+void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory);
+void getItem(tokens* command, Room* &currentRoom);
 void printSandwichContents();
 void printInventory(vector<Items*> *inventory);
-bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory, Parser *p);
+bool processCommand(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, Parser *&p);
 
 void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
 }
 
-void getItem(tokens* command, Room* currentRoom){
+void getItem(tokens* command, Room* &currentRoom){
 
 
 }
 
-void dropItem(tokens* command, Room* currentRoom, vector<Items*> *inventory){
+void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
 
 }
 
@@ -42,7 +42,7 @@ void printSandwichContents(){
 
 }
 
-void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
+void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   Room* Zuulway = new Room((char*)("Zuulway"));
   Room* DarkRoom = new Room((char*)("DarkRoom"));
   Room* EmployeeHangout = new Room((char*)("EmployeeHangout"));
@@ -204,7 +204,7 @@ void createRooms(vector<Room*> *roomVtr, Room *currentRoom){
   LettuceRoom->setItems(new Items((char*)("lettuce")));  
 }
 
-bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventory, Parser *p){
+bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
     printHelp(p);   
@@ -231,12 +231,12 @@ bool processCommand(tokens* command, Room* currentRoom, vector<Items*> *inventor
 }
 
  //set up inventory and state what is in it
-void printInventory(vector<Items*> *inventory) {
+void printInventory(vector<Items*> *&inventory) {
   char output[80];
 
   cout << "You are carrying:  " << endl;
-  for(vector<Items*>::iterator index = inventory->begin(); index!=inventory->end(); ++index){
-    cout << index->getName() << " " << endl;
+  for(int i = 0; i < inventory->size(); i++){
+    cout << inventory->at(i)->getName() << " " << endl;
   }
 }
 
@@ -255,7 +255,7 @@ void printSandwichContents(Vector<Items*> sandwichVtr) {
   }*/
     
 //if user types help, print out these messages
-void printHelp(Parser *p){
+void printHelp(Parser *&p){
   cout << "You are lost in a haunted sub shop." << endl;
   cout << "You need to make a nice sandwich with: jalapenos, tomatoes, mayo, turkey, lettuce, and cheese. " << endl;
   cout << "Your command words are: " << endl;
@@ -264,7 +264,7 @@ void printHelp(Parser *p){
 }
 
 
-void goRoom(tokens* command, Room* currentRoom) {
+void goRoom(tokens* command, Room* &currentRoom) {
 
   char* direction = command->word2;
   // Try to leave current room.
@@ -295,7 +295,6 @@ int main(){
   Parser *p = new Parser();
   bool finished = false;
   while (finished == false){
-    cout << "lol fix pass by ref ex: currentroom" << endl;
     tokens* command = p->getCommand();
     finished = processCommand(command, currentRoom, inventory, p);
   }

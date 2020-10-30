@@ -170,9 +170,8 @@ tokens* Parser::parseCommand(char* inputLine){
 }
 
 
-tokens* Parser::showCommand(){
+void  Parser::showCommand(){
   commands.showAll();
-
 }
 Parser::Parser(){
   commands = CommandWords();

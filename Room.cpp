@@ -13,7 +13,7 @@ void Room::setDescription(char* inputDescription){
 }
 
 Room* Room::checkExits(char* inputDirection){
-  unordered_map<const char*, Room*>:: iterator index;
+  unordered_map<char*, Room*>:: iterator index;
   Room *nextRoom = NULL;
   for (index = roomExits.begin(); index != roomExits.end(); index++) {
     if (strcmp(index->first, inputDirection) ==0) {
@@ -24,16 +24,14 @@ Room* Room::checkExits(char* inputDirection){
   return nextRoom;
 }
 
-void Room::setExits(const char* direction, Room* inputExits){
+void Room::setExits(char* direction, Room* inputExits){
   roomExits.insert(make_pair(direction, inputExits));
-  //roomExits[direction] = inputExits;
-
 }
-
+/*
 char* Room::getItems(){
 
 
-}
+}*/
 
 void Room::setItems(Items* inputItems){
   itemVtr->push_back(inputItems);
@@ -50,9 +48,9 @@ char* Room::getLongDescription(){
 
 //got from cplusplus.com
 char* Room::getExitString(){
-  unordered_map<const char*, Room*>:: iterator index;
+  unordered_map< char*, Room*>:: iterator index;
   strcpy(exitString, "Exits in this room: ");
-   for (index = roomExits.begin(); index != roomExits.end(); index++) {
+  for (index = roomExits.begin(); index != roomExits.end(); index++) {
      cout << index->first << " ";
      strcat(exitString, index->first);
      strcat(exitString, " ");
