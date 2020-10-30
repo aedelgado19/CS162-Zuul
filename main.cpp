@@ -20,7 +20,7 @@ void goRoom(tokens* command, Room* &currentRoom);
 void quit();
 void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, vector<Items*> *&sandwichVtr);
 void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory);
-void printSandwichContents(vector<Items*> *sandwichVtr);
+bool printSandwichContents(vector<Items*> *sandwichVtr);
 void printInventory(vector<Items*> *inventory);
 bool processCommand(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, Parser *&p, vector<Items*> *&sandwichVtr);
 
@@ -106,6 +106,8 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   cout << "Type 'help' if you need help." << endl; 
   cout << " " << endl;
   cout << "A sad empty sandwich lays on the counter. To escape, you must add: tomatoes, mayo, jalapenos, turkey, cheese, and lettuce." << endl;
+  cout << "Remember, to add items to the sandwich, drop an ingredient in the Zuulway room." << endl;
+  cout << "Once you think you have dropped all 6 ingredients, type 'sandwich' to win!" << endl;
   cout << "Good luck!" << endl;
   cout << " " << endl;
   
@@ -169,7 +171,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   //storage
   Storage->setDescription((char*)("You are in the storage room. Nothing cool here."));
   Storage->setExits((char*)("north"), Outside);
-  Storage->setExits((char*)("west"), VegetableRoom);
+  Storage->setExits((char*)("west"), MeatRoom);
   Storage->setExits((char*)("east"), BossOffice);
   roomVtr->push_back(Storage);
 
@@ -237,7 +239,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   
   //items
   JalapenoRoom->setItems(new Items((char*)("jalapenos")));
-  VegetableRoom->setItems(new Items((char*)("turkey")));
+  MeatRoom->setItems(new Items((char*)("turkey")));
   CheeseRoom->setItems(new Items((char*)("cheese")));
   MayonnaiseRoom->setItems(new Items((char*)("mayo")));
   VegetableRoom->setItems(new Items((char*)("tomatoes")));
@@ -266,15 +268,13 @@ bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &invent
     printInventory(inventory);
   }
   else if(strcmp(command->word1, "sandwich") == 0){
-    printSandwichContents(sandwichVtr);
+    wantToQuit = printSandwichContents(sandwichVtr);
   }
   return wantToQuit;
 }
 
  //set up inventory and state what is in it
 void printInventory(vector<Items*> *inventory) {
-  char output[80];
-
   cout << "You are carrying:  " << endl;
   for(int i = 0; i < inventory->size(); i++){
     cout << inventory->at(i)->getName() << " " << endl;
@@ -282,12 +282,18 @@ void printInventory(vector<Items*> *inventory) {
 }
 
 //set up sandwich content array and state what is in it
-void printSandwichContents(vector<Items*> *sandwichVtr) {
-
-
-
-  
-
+bool printSandwichContents(vector<Items*> *sandwichVtr) {
+    int count = 0; //amount of things on sandwich
+  cout << "The sandwich contains:  " << endl;
+  for(int i = 0; i < sandwichVtr->size(); i++){
+    cout << sandwichVtr->at(i)->getName() << " " << endl;
+    count++;
+  }
+  if(count == 6){
+    cout << "You have won Zuulway and successfully made the sandwich!!" << endl;
+    return true;
+  }
+  return false;
 }
     
 //if user types help, print out these messages
@@ -297,6 +303,7 @@ void printHelp(Parser *p){
   cout << "Your command words are: " << endl;
   p->showCommand();
   cout << "by the way, 'sandwich' returns contents of sandwich." << endl;
+  cout << "once you think you have dropped all 6 ingredients, type 'sandwich' to win!" << endl;
 }
 
 
@@ -319,7 +326,7 @@ void goRoom(tokens* command, Room* &currentRoom) {
 int main(){
   vector<Room*> *roomVtr = new vector<Room*>();
   vector<Items*> *sandwichVtr = new vector<Items*>();
-  vector<Items*> *inventory = new vector<Items*>();
+ vector<Items*> *inventory = new vector<Items*>();
 
   Room* currentRoom = NULL; 
   createRooms(roomVtr, currentRoom);
@@ -331,6 +338,7 @@ int main(){
   while (finished == false){
     tokens* command = p->getCommand();
     finished = processCommand(command, currentRoom, inventory, p, sandwichVtr);
+ 
   }
   quit();
   return 0;
