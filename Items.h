@@ -6,6 +6,6 @@ public:
   char* getName();
   Items(char* inputName);
 private:
-  char* name;
+  char name[20];
 };
 

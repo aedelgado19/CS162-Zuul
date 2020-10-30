@@ -41,7 +41,9 @@ void Room::setItems(Items* inputItems){
 char* Room::getLongDescription(){
   char* output = new char[100];
   strcpy(output, getRoom());
+  strcat(output, "\n");
   strcat(output, description);
+  strcat(output, "\n");
   strcat(output, getExitString());
   return output;
 }
@@ -49,20 +51,20 @@ char* Room::getLongDescription(){
 //got from cplusplus.com
 char* Room::getExitString(){
   unordered_map< char*, Room*>:: iterator index;
-  strcpy(exitString, "Exits in this room: ");
+  strcpy(exitString, "Exits in this room: \n");
   for (index = roomExits.begin(); index != roomExits.end(); index++) {
-     cout << index->first << " ";
-     strcat(exitString, index->first);
-     strcat(exitString, " ");
+    //cout << index->first << " " << endl;
+    strcat(exitString, index->first);
+    strcat(exitString, "\n");
   }
-  /*strcat(returnString, "Items in this room: ");
+  strcat(exitString, "Items in this room: ");
   
   if(strcmp(getItems(), "") == 0){
-    strcat(returnString, "no items.");
+    strcat(exitString, "no items.");
   } else {
-    strcat(returnString, " ");
-    strcat(returnString, getItems());
-    }*/
+    strcat(exitString, " ");
+    strcat(exitString, getItems());
+  }
   return exitString;
 }
 
@@ -73,6 +75,5 @@ char* Room::getRoom(){
 
 Room::Room(char* inputRoomName){
   itemVtr = new vector<Items*>();
-  cout << "in room constructor" << endl;
   strcpy(roomName, inputRoomName);
 }
