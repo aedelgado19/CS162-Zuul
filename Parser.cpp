@@ -18,7 +18,7 @@ tokens* Parser::getCommand(){
     cin.get();
     mytoken = parseCommand(inputLine);
     isValid = checkValid(mytoken);
-    cout << isValid << endl;
+    //cout << isValid << endl;
   }
   //command is valid
   

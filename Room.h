@@ -16,11 +16,13 @@ public:
   char* getLongDescription();
   char* getExitString();
   char* getRoom();
+  Items* getItem(char* inputItem);
+  void addItem(Items* inputItem);
   Room* checkExits(char* inputDirection);
+  void removeItem(char* inputItem);
   Room(char* inputRoomName);
 private:
   char description[200];
-  char* items;
   char exitString[512];
   char roomName[50];
   unordered_map<char*, Room*> roomExits;

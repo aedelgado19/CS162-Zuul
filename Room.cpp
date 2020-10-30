@@ -12,11 +12,36 @@ void Room::setDescription(char* inputDescription){
 
 }
 
+void Room::removeItem(char* inputItem){
+  for(int i = 0; i < itemVtr->size(); i++){
+    if(strcmp(itemVtr->at(i)->getName(), inputItem) == 0){
+      itemVtr->erase(itemVtr->begin()+i);
+      break;
+    }
+  }
+}
+
+void Room::addItem(Items* inputItem){
+  itemVtr->push_back(inputItem);
+}
+
+
+//diff from getItems()
+Items* Room::getItem(char* inputItem){
+  for(int i = 0; i < itemVtr->size(); i++){
+    if(strcmp(itemVtr->at(i)->getName(), inputItem) == 0){
+      return itemVtr->at(i);
+    }
+  }
+  return NULL;
+}
+
 Room* Room::checkExits(char* inputDirection){
   unordered_map<char*, Room*>:: iterator index;
   Room *nextRoom = NULL;
   for (index = roomExits.begin(); index != roomExits.end(); index++) {
     if (strcmp(index->first, inputDirection) ==0) {
+      cout << " ***************************************" << endl;
       cout << "\nYou head " << inputDirection << " to " << index->second->getRoom() << endl;
       nextRoom = index->second;
     }
@@ -27,11 +52,17 @@ Room* Room::checkExits(char* inputDirection){
 void Room::setExits(char* direction, Room* inputExits){
   roomExits.insert(make_pair(direction, inputExits));
 }
-/*
-char* Room::getItems(){
 
-
-}*/
+char*  Room::getItems(){
+  char* toReturn = new char[80];
+  
+  for(int i = 0; i < itemVtr->size(); i++){
+    strcat(toReturn, "\n");
+    strcat(toReturn, itemVtr->at(i)->getName());
+    strcat(toReturn, "\n");
+  }
+  return toReturn; 
+}
 
 void Room::setItems(Items* inputItems){
   itemVtr->push_back(inputItems);
@@ -51,13 +82,14 @@ char* Room::getLongDescription(){
 //got from cplusplus.com
 char* Room::getExitString(){
   unordered_map< char*, Room*>:: iterator index;
-  strcpy(exitString, "Exits in this room: \n");
+  strcpy(exitString, "\nExits in this room: \n");
   for (index = roomExits.begin(); index != roomExits.end(); index++) {
     //cout << index->first << " " << endl;
     strcat(exitString, index->first);
     strcat(exitString, "\n");
   }
-  strcat(exitString, "Items in this room: ");
+  strcat(exitString, "\n");
+  strcat(exitString, "Items in this room: \n");
   
   if(strcmp(getItems(), "") == 0){
     strcat(exitString, "no items.");

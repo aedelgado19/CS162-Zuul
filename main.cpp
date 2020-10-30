@@ -19,7 +19,7 @@ void printHelp(Parser *p);
 void goRoom(tokens* command, Room* &currentRoom);
 void quit();
 void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory);
-void getItem(tokens* command, Room* &currentRoom);
+void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory);
 void printSandwichContents();
 void printInventory(vector<Items*> *inventory);
 bool processCommand(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, Parser *&p);
@@ -28,18 +28,45 @@ void quit(){
   cout << "Thank you for playing Zuulway. Quitting program now." << endl;
 }
 
-void getItem(tokens* command, Room* &currentRoom){
+void getItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
+  char* item;
+  strcpy(item, command->word2);
 
-
+  Items* newItem;
+  newItem = currentRoom->getItem(item);
+  if(newItem == NULL){
+    cout << "That item is not in this room!" << endl;
+  } else {
+    inventory->push_back(newItem);
+    currentRoom->removeItem(item);
+    cout << "You picked up: " << newItem->getName() << endl;
+  }
 }
 
-void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory){
+void dropItem(tokens* command, Room* &currentRoom, vector<Items*> *&inventory, ){
+  char* item;
+  strcpy(item, command->word2);
+  
 
-}
+  Items* newItem = NULL;
+  int index;
+  for(int i = 0; i < inventory->size(); i++){
+    if(strcmp(inventory->at(i)->getName(), item) == 0){
+      newItem = inventory->at(i);
+      index = i;
+    }
+  }
 
-void printSandwichContents(){
-
-
+  if(newItem == NULL){
+    cout << "You don't have anything like that to drop." << endl;
+  } else {
+    if(strcmp(currentRoom->getName(), "Zuulway") == 0){
+      
+    }
+    currentRoom->addItem(newItem);
+    inventory->erase(inventory->begin()+index);
+    cout << "You dropped: " << newItem->getName() << endl;
+  }
 }
 
 void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
@@ -145,7 +172,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   WeirdRoom->setDescription((char*)("You are in a weird room. It seems like nobody has been here in a while."));
   WeirdRoom->setExits((char*)("north"), Outside);
   WeirdRoom->setExits((char*)("east"), Zuulway);
-  WeirdRoom->setExits((char*)("southwest"), VegetableRoom);
+  WeirdRoom->setExits((char*)("southwest"), MeatRoom);
   WeirdRoom->setExits((char*)("south"), Storage);
   roomVtr->push_back(WeirdRoom);
 
@@ -206,7 +233,7 @@ void createRooms(vector<Room*> *&roomVtr, Room *&currentRoom){
   LettuceRoom->setItems(new Items((char*)("lettuce")));  
 }
 
-bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p){
+bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &inventory, Parser* &p,   vector<Items*> *sandwichVtr){
   bool wantToQuit = false;
   if(strcmp(command->word1, "help") == 0){
     printHelp(p);   
@@ -218,7 +245,7 @@ bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &invent
     wantToQuit = true;
   }
   else if(strcmp(command->word1, "get") == 0){
-    getItem(command, currentRoom);
+    getItem(command, currentRoom, inventory);
   }
   else if(strcmp(command->word1, "drop") == 0){
     dropItem(command, currentRoom, inventory);
@@ -227,7 +254,7 @@ bool processCommand(tokens* command, Room* &currentRoom, vector<Items*>* &invent
     printInventory(inventory);
   }
   else if(strcmp(command->word1, "sandwich") == 0){
-    printSandwichContents();
+    printSandwichContents(sandwichVtr);
   }
   return wantToQuit;
 }
@@ -242,9 +269,8 @@ void printInventory(vector<Items*> *inventory) {
   }
 }
 
-
 //do this after you get inventory working!!! it's basically the same.
-/*    
+
 //set up sandwich content array and state what is in it
 void printSandwichContents(Vector<Items*> sandwichVtr) {
   char output[];
@@ -254,7 +280,7 @@ void printSandwichContents(Vector<Items*> sandwichVtr) {
   }
   System.out.println("The sandwich has: ");
   System.out.println(output);
-  }*/
+}
     
 //if user types help, print out these messages
 void printHelp(Parser *p){
@@ -283,7 +309,6 @@ void goRoom(tokens* command, Room* &currentRoom) {
 }
 
 int main(){
-
   vector<Room*> *roomVtr = new vector<Room*>();
   vector<Items*> *sandwichVtr = new vector<Items*>();
   vector<Items*> *inventory = new vector<Items*>();
